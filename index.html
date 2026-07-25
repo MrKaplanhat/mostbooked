@@ -548,7 +548,7 @@ const SITE = {
   reels: {
     driveFolderId: "15yGYqIq2Sm4me6d0ztQco85r67UCA4dF",
     driveApiKey: "AIzaSyCZK1E8_vi4cw8ycqBov39v7I1EPXW3FPo",
-    previewSeconds: 8,
+    previewSeconds: 6,
     items: []
   },
 
@@ -954,9 +954,9 @@ async function loadReels(){
       const doubled = items.length > 2 ? items.concat(items) : items;
       track.innerHTML = doubled.map(r => `
         <div class="reel-card media-trigger" data-video-id="" data-video-src="${r.videoSrc}">
-          ${r.poster
-            ? `<img src="${r.poster}" alt="${r.title || "Reel"}">`
-            : `<video class="thumb-preview" data-preview="${cfg.previewSeconds || 8}" autoplay muted loop playsinline preload="metadata"><source src="${r.videoSrc}" type="video/mp4"></video>`}
+          <video class="thumb-preview" data-preview="${cfg.previewSeconds || 6}" autoplay muted loop playsinline preload="metadata" ${r.poster ? `poster="${r.poster}"` : ""}>
+            <source src="${r.videoSrc}" type="video/mp4">
+          </video>
           ${r.platform ? `<span class="reel-badge">${r.platform}</span>` : ""}
           <div class="reel-play"></div>
         </div>
