@@ -445,9 +445,9 @@ footer h2{ font-size:clamp(2.2rem, 6vw, 4.5rem); max-width:16ch; margin:0 auto 4
 <div id="recognition-slot"></div>
 <div id="footer-slot"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 
 <script>
 /* =====================================================
@@ -483,10 +483,10 @@ const SITE = {
   ],
 
   hero: {
-    title_line1: "Mostbooked",
-    title_line2: "Odira Ndubuaku",
-    eyeLabel: "The Studio",
-    studioLabel: "The Eye",
+    title_line1: "Odira",
+    title_line2: "Ndubuaku | Mostbooked",
+    eyeLabel: "The Eye",
+    studioLabel: "The Studio",
     tagline_line: "Documenting people, places, stories and culture that shapes us.",
     videoSrc: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784978108/mostbooked_bg_1080p_wjx9f8.mp4",
     videoPoster: "",
@@ -497,7 +497,7 @@ const SITE = {
   },
 
   journey: {
-    founderPhoto: "founders photo odira.jpg",
+    founderPhoto: "",
     headline: "From a design tablet in 2012 to a studio across three continents.",
     body: "Mostbooked is built on one instinct: find the story before you point the camera. It started as graphic design in 2012, moved through photography and video, and grew into a studio that gives audiences real access to entrepreneurs, industry leaders, creators and cultural icons across Africa and beyond. The work isn't built for trends — it's long-form, trust-building storytelling made to actually connect with the people watching it.",
     timeline: [
@@ -753,18 +753,31 @@ function closeMediaModal(){
 /* Some browsers silently pause an autoplaying <video> once it's clipped out of
    the visible mask area by the marquee (or the tab loses focus, etc). This
    keeps every ".loop-preview" video resuming itself so the loop never stalls. */
+/* Videos only start downloading/playing once they're actually about to be seen
+   (rootMargin gives a small head start), and pause again once scrolled away —
+   so a page with 20 preview clips never tries to buffer all 20 at once. */
 function keepPreviewsPlaying(root = document){
-  root.querySelectorAll("video.loop-preview:not([data-watchdog])").forEach(v => {
-    v.dataset.watchdog = "1";
-    v.addEventListener("pause", () => { v.play().catch(() => {}); });
-    v.play().catch(() => {});
-  });
   if(!keepPreviewsPlaying._observer){
     keepPreviewsPlaying._observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if(entry.isIntersecting) entry.target.play().catch(() => {}); });
-    }, { threshold: 0.01 });
+      entries.forEach(entry => {
+        const v = entry.target;
+        if(entry.isIntersecting){
+          v.dataset.shouldPlay = "1";
+          v.play().catch(() => {});
+        }else{
+          v.dataset.shouldPlay = "0";
+          v.pause();
+        }
+      });
+    }, { threshold: 0.01, rootMargin: "150px" });
   }
-  root.querySelectorAll("video.loop-preview").forEach(v => keepPreviewsPlaying._observer.observe(v));
+  root.querySelectorAll("video.loop-preview:not([data-watchdog])").forEach(v => {
+    v.dataset.watchdog = "1";
+    v.addEventListener("pause", () => {
+      if(v.dataset.shouldPlay === "1") v.play().catch(() => {});
+    });
+    keepPreviewsPlaying._observer.observe(v);
+  });
 }
 
 function wireMediaTriggers(root = document){
@@ -843,7 +856,7 @@ function renderJourney(){
    if thumbSrc is set, otherwise the static fallback image. */
 function mediaThumb(item, previewSeconds){
   if(item.thumbSrc){
-    return `<video class="thumb-preview loop-preview" data-preview="${previewSeconds}" autoplay muted loop playsinline preload="metadata" poster="${item.image || ""}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
+    return `<video class="thumb-preview loop-preview" data-preview="${previewSeconds}" muted loop playsinline preload="metadata" poster="${item.image || ""}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
   }
   return `<img src="${item.image}" alt="${item.title}">`;
 }
@@ -1043,7 +1056,7 @@ function loadReels(){
         const poster = parsed ? `${base}/so_0/${parsed.idPath}.jpg` : "";
         return `
         <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}" data-vertical="1">
-          <video class="loop-preview" autoplay muted loop playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
+          <video class="loop-preview" muted loop playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
             <source src="${preview}" type="video/mp4">
           </video>
           ${r.platform ? `<span class="reel-badge">${r.platform}</span>` : ""}
