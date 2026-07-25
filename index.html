@@ -328,7 +328,7 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .video-modal-close{ position:absolute; top:-46px; right:0; color:var(--ivory); font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; gap:8px; }
 .video-modal-close:hover{ color:var(--gold); }
 
-/* ============ REELS SLIDER (Instagram / YouTube Shorts — Drive-ready) ============ */
+/* ============ REELS SLIDER (Instagram / YouTube Shorts — Cloudinary-powered) ============ */
 .reels-block{ margin-top:100px; }
 .reels-label-row{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:32px; }
 .reels-label{ font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim); }
@@ -539,17 +539,25 @@ const SITE = {
     attribution: "Odira Ndubuaku"
   },
 
-  // ---------- SHORTS & CLIPS (reel slider — Google Drive-ready) ----------
-  // Same idea as Photography: put previewSeconds-long (or longer) vertical clips
-  // in a Drive folder, add driveFolderId + driveApiKey, and this slider updates
-  // on its own. You can also hand-add items to the "items" array below —
-  // those show alongside anything pulled from Drive.
-  // previewSeconds controls how much of each clip loops silently before someone clicks.
+  // ---------- SHORTS & CLIPS (reel slider — Cloudinary-powered) ----------
+  // TO ADD MORE REELS: copy one line below and paste it again, then swap in
+  // the new clip's URL. That's the whole process — nothing else to edit.
+  //   { src: "PASTE THE CLOUDINARY VIDEO URL HERE", title: "Short label", platform: "IG" },
+  // The URL is exactly what Cloudinary gives you when you copy a video's link
+  // (starts with https://res.cloudinary.com/...). From that one link, the site
+  // automatically builds: a silent 6-second looping preview, a poster image,
+  // and the full clip for the click-to-watch popup — no extra files needed.
   reels: {
-    driveFolderId: "15yGYqIq2Sm4me6d0ztQco85r67UCA4dF",
-    driveApiKey: "AIzaSyCZK1E8_vi4cw8ycqBov39v7I1EPXW3FPo",
     previewSeconds: 6,
-    items: []
+    items: [
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988511/Insta_Saver__mostbooked_reel_CwDMbQwoAt4_720x1280p_1_co6rkt.mp4", title: "Mostbooked", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988475/Insta_Saver__styled_by_maklinscout_reel_DHty9_TsLrQ_1080x1920p_1_rupxhl.mp4", title: "Styled by Maklinscout", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988454/Insta_Saver__mostbooked_reel_CqqYQqfNr4E_720x1280p_1_pdeeha.mp4", title: "Mostbooked", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988426/Insta_Saver__emiesi.o_reel_DMqFic3I4OZ_1080x1920p_1_q431k9.mp4", title: "Emiesi.o", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988447/Insta_Saver__mostbooked_reel_CzwNEYaIWGS_720x1280p_1_d1buzl.mp4", title: "Mostbooked", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988442/Insta_Saver__mostbooked_reel_CpuNQruogBz_720x1280p_1_oetbhi.mp4", title: "Mostbooked", platform: "IG" },
+      { src: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988438/Insta_Saver__mostbooked_reel_CseIuYEoOzm_720x1280p_1_xjzfcf.mp4", title: "Mostbooked", platform: "IG" }
+    ]
   },
 
   recognition: {
@@ -913,66 +921,59 @@ function renderConversations(){
   loadReels();
 }
 
-/* Pulls short vertical clips from a Drive folder if configured, merges with
-   any manually-added SITE.reels.items, and falls back to a single placeholder
-   card if there's nothing to show yet. */
-async function loadReels(){
+/* Takes the exact URL Cloudinary gives you for a video and splits it into
+   { cloudName, idPath } so we can rebuild preview/poster/full variants of it.
+   Returns null if it's not a recognizable Cloudinary video URL. */
+function parseCloudinaryUrl(url){
+  const m = (url || "").match(/^https:\/\/res\.cloudinary\.com\/([^/]+)\/video\/upload\/(.+)\.[a-zA-Z0-9]+$/);
+  return m ? { cloudName: m[1], idPath: m[2] } : null;
+}
+
+/* Builds each reel card's preview/full/poster URLs straight from the raw
+   Cloudinary URL pasted into SITE.reels.items — no manual trimming or
+   separate preview file required. Falls back to a placeholder if nothing's added yet. */
+function loadReels(){
   const cfg = SITE.reels;
   const statusEl = document.getElementById("reels-drive-status");
   const statusText = document.getElementById("reels-drive-status-text");
-  let items = (cfg.items || []).slice();
-  let live = false;
-
-  if(cfg.driveFolderId && cfg.driveApiKey){
-    try{
-      const q = encodeURIComponent(`'${cfg.driveFolderId}' in parents and mimeType contains 'video/' and trashed = false`);
-      const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,thumbnailLink)&orderBy=name&key=${cfg.driveApiKey}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if(data.files && data.files.length){
-        const driveItems = data.files.map(f => ({
-          videoSrc: `https://drive.google.com/uc?export=download&id=${f.id}`,
-          poster: f.thumbnailLink || "",
-          title: f.name,
-          platform: ""
-        }));
-        items = driveItems.concat(items);
-        live = true;
-      }
-    }catch(err){
-      console.warn("Mostbooked: could not load the Drive reels folder.", err);
-    }
-  }
+  const items = cfg.items || [];
+  const sec = cfg.previewSeconds || 6;
 
   const track = document.getElementById("reels-track");
   if(track){
     if(items.length === 0){
       track.classList.add("is-static");
-      track.innerHTML = `<div class="reel-placeholder">[ Add Instagram/YouTube Shorts to SITE.reels.items, or connect a Google Drive folder, to populate this slider ]</div>`;
+      track.innerHTML = `<div class="reel-placeholder">[ Paste Cloudinary video URLs into SITE.reels.items to populate this slider ]</div>`;
     }else{
       track.classList.remove("is-static");
-      const doubled = items.length > 2 ? items.concat(items) : items;
-      track.innerHTML = doubled.map(r => `
-        <div class="reel-card media-trigger" data-video-id="" data-video-src="${r.videoSrc}">
-          <video class="thumb-preview" data-preview="${cfg.previewSeconds || 6}" autoplay muted loop playsinline preload="metadata" ${r.poster ? `poster="${r.poster}"` : ""}>
-            <source src="${r.videoSrc}" type="video/mp4">
+      const cards = items.map(r => {
+        const parsed = parseCloudinaryUrl(r.src);
+        const base = parsed ? `https://res.cloudinary.com/${parsed.cloudName}/video/upload` : null;
+        const preview = parsed ? `${base}/so_0,eo_${sec},q_auto,f_mp4/${parsed.idPath}.mp4` : r.src;
+        const full = parsed ? `${base}/q_auto/${parsed.idPath}.mp4` : r.src;
+        const poster = parsed ? `${base}/so_0/${parsed.idPath}.jpg` : "";
+        return `
+        <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}">
+          <video autoplay muted loop playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
+            <source src="${preview}" type="video/mp4">
           </video>
           ${r.platform ? `<span class="reel-badge">${r.platform}</span>` : ""}
           <div class="reel-play"></div>
-        </div>
-      `).join("");
+        </div>`;
+      });
+      const doubled = items.length > 2 ? cards.concat(cards) : cards;
+      track.innerHTML = doubled.join("");
     }
   }
 
   if(statusEl && statusText){
-    statusEl.classList.toggle("is-live", live);
-    statusText.textContent = live
-      ? "Synced automatically from Google Drive"
-      : (items.length ? "Showing added clips" : "Nothing connected yet");
+    statusEl.classList.toggle("is-live", items.length > 0);
+    statusText.textContent = items.length
+      ? `Showing ${items.length} clip${items.length === 1 ? "" : "s"}`
+      : "Nothing added yet";
   }
 
   wireMediaTriggers();
-  initPreviewLoops();
   if(typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
 }
 
