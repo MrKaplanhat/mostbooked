@@ -324,7 +324,8 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .video-modal{ position:fixed; inset:0; z-index:300; background:rgba(10,9,7,0.92); display:none; align-items:center; justify-content:center; padding:5vw; }
 .video-modal.is-open{ display:flex; }
 .video-modal-inner{ width:100%; max-width:960px; aspect-ratio:16/9; background:#000; position:relative; border:1px solid var(--line); }
-.video-modal-inner iframe, .video-modal-inner video{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-modal-inner.is-vertical{ width:auto; height:85vh; max-height:85vh; max-width:90vw; aspect-ratio:9/16; }
+.video-modal-inner iframe, .video-modal-inner video{ position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:contain; }
 .video-modal-close{ position:absolute; top:-46px; right:0; color:var(--ivory); font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; gap:8px; }
 .video-modal-close:hover{ color:var(--gold); }
 
@@ -656,7 +657,9 @@ function openMediaModal(media){
   const modal = document.getElementById("video-modal");
   const frame = document.getElementById("video-modal-frame");
   const video = document.getElementById("video-modal-video");
+  const inner = modal ? modal.querySelector(".video-modal-inner") : null;
   if(!modal || !frame || !video) return;
+  if(inner) inner.classList.toggle("is-vertical", !!media.vertical);
 
   if(media.videoId){
     video.pause(); video.removeAttribute("src"); video.style.display = "none";
@@ -685,12 +688,29 @@ function closeMediaModal(){
 
 /* Wires click-to-play on any ".media-trigger" element that isn't already wired —
    safe to call repeatedly (e.g. after Drive content loads in asynchronously). */
+/* Some browsers silently pause an autoplaying <video> once it's clipped out of
+   the visible mask area by the marquee (or the tab loses focus, etc). This
+   keeps every ".loop-preview" video resuming itself so the loop never stalls. */
+function keepPreviewsPlaying(root = document){
+  root.querySelectorAll("video.loop-preview:not([data-watchdog])").forEach(v => {
+    v.dataset.watchdog = "1";
+    v.addEventListener("pause", () => { v.play().catch(() => {}); });
+    v.play().catch(() => {});
+  });
+  if(!keepPreviewsPlaying._observer){
+    keepPreviewsPlaying._observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.play().catch(() => {}); });
+    }, { threshold: 0.01 });
+  }
+  root.querySelectorAll("video.loop-preview").forEach(v => keepPreviewsPlaying._observer.observe(v));
+}
+
 function wireMediaTriggers(root = document){
   root.querySelectorAll(".media-trigger:not([data-wired])").forEach(el => {
     el.dataset.wired = "1";
     el.style.cursor = "pointer";
     el.addEventListener("click", () => {
-      openMediaModal({ videoId: el.dataset.videoId, videoSrc: el.dataset.videoSrc });
+      openMediaModal({ videoId: el.dataset.videoId, videoSrc: el.dataset.videoSrc, vertical: el.dataset.vertical === "1" });
     });
   });
 }
@@ -755,7 +775,7 @@ function renderJourney(){
    if thumbSrc is set, otherwise the static fallback image. */
 function mediaThumb(item, previewSeconds){
   if(item.thumbSrc){
-    return `<video class="thumb-preview" data-preview="${previewSeconds}" autoplay muted loop playsinline preload="metadata" poster="${item.image || ""}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
+    return `<video class="thumb-preview loop-preview" data-preview="${previewSeconds}" autoplay muted loop playsinline preload="metadata" poster="${item.image || ""}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
   }
   return `<img src="${item.image}" alt="${item.title}">`;
 }
@@ -802,6 +822,7 @@ function renderFilms(){
   `;
   wireMediaTriggers();
   initPreviewLoops();
+  keepPreviewsPlaying();
 }
 
 function renderCommercial(){
@@ -953,8 +974,8 @@ function loadReels(){
         const full = parsed ? `${base}/q_auto/${parsed.idPath}.mp4` : r.src;
         const poster = parsed ? `${base}/so_0/${parsed.idPath}.jpg` : "";
         return `
-        <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}">
-          <video autoplay muted loop playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
+        <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}" data-vertical="1">
+          <video class="loop-preview" autoplay muted loop playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
             <source src="${preview}" type="video/mp4">
           </video>
           ${r.platform ? `<span class="reel-badge">${r.platform}</span>` : ""}
@@ -974,6 +995,7 @@ function loadReels(){
   }
 
   wireMediaTriggers();
+  keepPreviewsPlaying();
   if(typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
 }
 
