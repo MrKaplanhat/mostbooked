@@ -118,8 +118,8 @@ nav.nav-hidden{ transform:translateY(-100%); }
 
 /* ============ HERO ============ */
 .hero{
-  min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end;
-  padding:0 5vw 90px; position:relative; overflow:hidden;
+  min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:0 5vw 45px; position:relative; overflow:hidden;
 }
 .hero-video, .hero-video-fallback{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
 .hero-video-fallback{
@@ -132,29 +132,28 @@ nav.nav-hidden{ transform:translateY(-100%); }
 }
 .hero-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(27,29,20,0.35) 0%, rgba(27,29,20,0.55) 55%, rgba(27,29,20,0.94) 100%); }
 .hero > *:not(.hero-video):not(.hero-video-fallback):not(.hero-scrim){ position:relative; z-index:2; }
-.hero-eyebrow{
-  font-size:0.76rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
-  margin-bottom:22px; display:flex; align-items:center; gap:14px;
+.hero-kicker{
+  display:block; font-family:'Inter', sans-serif;
+  font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:8px;
 }
-.hero-eyebrow::before{ content:""; width:40px; height:1px; background:var(--gold-dim); display:inline-block; }
-.hero h1{
-  font-size:clamp(2.1rem, 5.6vw, 4.6rem); line-height:1.08; max-width:15ch; font-weight:500;
+.hero-name-block{ width:100%; }
+.hero-name-block.align-left{ text-align:center; }
+.hero-name-block.align-right{ text-align:center; }
+.hero-name-block + .hero-name-block{ margin-top:4px; }
+.hero-name{
+  font-family:'Fraunces', serif; font-weight:500;
+  font-size:clamp(1.9rem, 6vw, 3.6rem); line-height:1.05; margin:0;
 }
-.hero h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
+.hero-sub{
+  margin-top:22px; max-width:44ch; font-size:1rem; line-height:1.6; color:var(--ivory-dim); text-align:center;
+  margin-left:auto; margin-right:auto;
+}
 .hero-meta{
-  margin-top:44px; display:flex; gap:56px; font-size:0.8rem; letter-spacing:0.03em; color:var(--ivory-dim);
+  margin-top:36px; display:flex; justify-content:center; gap:56px; font-size:0.8rem; letter-spacing:0.03em; color:var(--ivory-dim);
 }
 .hero-meta div{ border-left:1px solid var(--line); padding-left:18px; }
 .hero-meta b{ display:block; color:var(--ivory); font-family:'Fraunces',serif; font-size:1.6rem; font-weight:400; margin-bottom:4px; }
-.scroll-cue{
-  position:absolute; bottom:36px; left:5vw; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--ivory-dim); display:flex; align-items:center; gap:10px; z-index:2;
-}
-.scroll-cue .bar{ width:1px; height:32px; background:var(--ivory-dim); position:relative; overflow:hidden; }
-.scroll-cue .bar::after{ content:""; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--gold); animation:pour 1.8s ease-in-out infinite; }
-@keyframes pour{ 0%{top:-100%;} 60%{top:100%;} 100%{top:100%;} }
-@media (prefers-reduced-motion: reduce){ .scroll-cue .bar::after{animation:none;} }
-
 /* ============ JOURNEY ============ */
 .journey{ padding:60px 5vw 160px; border-top:1px solid var(--line); }
 .journey-grid{ display:grid; grid-template-columns:280px 1fr; gap:80px; }
@@ -370,6 +369,66 @@ footer h2{ font-size:clamp(2.2rem, 6vw, 4.5rem); max-width:16ch; margin:0 auto 4
 .footer-bottom{ margin-top:110px; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--ivory-dim); letter-spacing:0.03em; border-top:1px solid var(--line); padding-top:28px; flex-wrap:wrap; gap:16px; }
 
 @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001ms !important; animation-iteration-count:1 !important; } }
+
+/* ============ MOBILE PASS ============ */
+@media (max-width:640px){
+  nav{ padding:18px 6vw; }
+  .logo{ font-size:1.05rem; }
+  .nav-cta{ padding:8px 16px; font-size:0.68rem; }
+
+  .hero{ padding:0 6vw 40px; }
+  .hero-kicker{ font-size:0.62rem; margin-bottom:6px; }
+  .hero-name{ font-size:clamp(1.6rem, 8.5vw, 2.4rem); }
+  .hero-meta{ flex-direction:column; gap:18px; margin-top:28px; }
+  .hero-meta div{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; }
+
+  .chapter-mark{ margin-bottom:16px; gap:12px; }
+  .chapter-mark .name{ font-size:0.7rem; letter-spacing:0.14em; }
+
+  .journey{ padding:40px 6vw 90px; }
+  .journey-grid{ gap:32px; }
+  .journey-photo{ margin-top:24px; }
+  .journey-body p{ font-size:1rem; margin-bottom:40px; }
+  .journey-timeline{ gap:18px; margin-bottom:56px; }
+
+  .films-chapter{ padding:60px 6vw 40px; }
+  .films-intro{ margin-bottom:40px; }
+  .case-study{ min-height:60vh; margin-bottom:44px; }
+  .case-study-content{ padding:28px 22px; }
+  .case-study h3{ font-size:clamp(1.5rem, 8vw, 2.2rem); }
+  .filmstrip-label{ padding:0 6vw; margin-bottom:22px; }
+  .filmstrip-track{ padding-left:6vw; }
+  .filmstrip-wrap{ padding-bottom:60px; }
+
+  .commercial{ padding:60px 6vw; }
+  .commercial-intro{ margin-bottom:32px; }
+  .reel-wrap{ margin-top:32px; }
+
+  .photography-intro{ padding:70px 6vw 10px; }
+  .photo-marquee{ padding:36px 0 70px; }
+  .photo-item, .photo-item.narrow, .photo-item.wide{ height:42vh; }
+
+  .conversations{ padding:70px 6vw; }
+  .conversations-intro{ margin-bottom:40px; }
+  .reels-block{ margin-top:60px; }
+  .reels-label-row{ margin-bottom:20px; }
+  .quote-break{ padding:90px 0 20px; }
+
+  .recognition{ padding:70px 6vw; }
+  .recognition-intro{ margin-bottom:40px; }
+  .stat-grid{ grid-template-columns:1fr 1fr; margin-bottom:44px; }
+  .stat-card{ padding:26px 20px; }
+  .stat-card b{ font-size:1.7rem; }
+  .press-note{ padding:26px; font-size:0.85rem; }
+
+  footer{ padding:90px 6vw 40px; }
+  footer h2{ margin-bottom:32px; }
+  .footer-cta{ padding:15px 28px; font-size:0.82rem; }
+  .footer-bottom{ margin-top:64px; flex-direction:column; align-items:flex-start; gap:10px; }
+}
+@media (max-width:400px){
+  .stat-grid{ grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
@@ -424,8 +483,11 @@ const SITE = {
   ],
 
   hero: {
-    headline_line1: "Documenting What Matters,",
-    headline_line2_italic: "People, culture and the moments that shape us.",
+    title_line1: "Mostbooked",
+    title_line2: "Odira Ndubuaku",
+    eyeLabel: "The Studio",
+    studioLabel: "The Eye",
+    tagline_line: "Documenting people, places, stories and culture that shapes us.",
     videoSrc: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784978108/mostbooked_bg_1080p_wjx9f8.mp4",
     videoPoster: "",
     stat1_number: "118,000+",
@@ -734,13 +796,19 @@ function renderHero(){
     <section class="hero" id="hero">
       ${videoMarkup}
       <div class="hero-scrim"></div>
-      <div class="hero-eyebrow">${SITE.brand.tagline}</div>
-      <h1>${v.headline_line1}<br><em>${v.headline_line2_italic}</em></h1>
+      <div class="hero-name-block align-left">
+        <span class="hero-kicker">${v.eyeLabel}</span>
+        <h1 class="hero-name">${v.title_line1}</h1>
+      </div>
+      <div class="hero-name-block align-right">
+        <span class="hero-kicker">${v.studioLabel}</span>
+        <h1 class="hero-name">${v.title_line2}</h1>
+      </div>
+      <p class="hero-sub">${v.tagline_line}</p>
       <div class="hero-meta">
         <div><b>${v.stat1_number}</b>${v.stat1_label}</div>
         <div><b>${v.stat2_number}</b>${v.stat2_label}</div>
       </div>
-      <div class="scroll-cue"><div class="bar"></div>Scroll</div>
     </section>
   `;
 }
