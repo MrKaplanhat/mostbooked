@@ -133,16 +133,16 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .hero-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(27,29,20,0.35) 0%, rgba(27,29,20,0.55) 55%, rgba(27,29,20,0.94) 100%); }
 .hero > *:not(.hero-video):not(.hero-video-fallback):not(.hero-scrim){ position:relative; z-index:2; }
 .hero-eyebrow{
-  font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
-  margin-bottom:32px; display:flex; align-items:center; gap:14px;
+  font-size:0.76rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:22px; display:flex; align-items:center; gap:14px;
 }
 .hero-eyebrow::before{ content:""; width:40px; height:1px; background:var(--gold-dim); display:inline-block; }
 .hero h1{
-  font-size:clamp(3rem, 9vw, 8.5rem); line-height:0.98; max-width:16ch; font-weight:500;
+  font-size:clamp(2.1rem, 5.6vw, 4.6rem); line-height:1.08; max-width:15ch; font-weight:500;
 }
 .hero h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
 .hero-meta{
-  margin-top:64px; display:flex; gap:56px; font-size:0.8rem; letter-spacing:0.03em; color:var(--ivory-dim);
+  margin-top:44px; display:flex; gap:56px; font-size:0.8rem; letter-spacing:0.03em; color:var(--ivory-dim);
 }
 .hero-meta div{ border-left:1px solid var(--line); padding-left:18px; }
 .hero-meta b{ display:block; color:var(--ivory); font-family:'Fraunces',serif; font-size:1.6rem; font-weight:400; margin-bottom:4px; }
@@ -155,19 +155,17 @@ nav.nav-hidden{ transform:translateY(-100%); }
 @keyframes pour{ 0%{top:-100%;} 60%{top:100%;} 100%{top:100%;} }
 @media (prefers-reduced-motion: reduce){ .scroll-cue .bar::after{animation:none;} }
 
-/* ============ PROLOGUE ============ */
-.prologue{ padding:180px 5vw; text-align:center; }
-.prologue blockquote{
-  font-family:'Fraunces',serif; font-weight:300; font-style:italic;
-  font-size:clamp(1.9rem, 4.4vw, 3.4rem); line-height:1.3; max-width:20ch; margin:0 auto;
-}
-.prologue .chapter-mark{ justify-content:center; margin-bottom:40px; }
-
 /* ============ JOURNEY ============ */
 .journey{ padding:60px 5vw 160px; border-top:1px solid var(--line); }
 .journey-grid{ display:grid; grid-template-columns:280px 1fr; gap:80px; }
 .journey-pin{ position:sticky; top:140px; align-self:start; }
 .journey-pin h2{ font-size:clamp(2rem,3.6vw,3rem); line-height:1.1; margin-top:10px; max-width:9ch; }
+.journey-photo{
+  margin-top:36px; aspect-ratio:3/4; border:1px dashed var(--line);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:20px; color:var(--ivory-dim); font-size:0.8rem; overflow:hidden;
+}
+.journey-photo img{ width:100%; height:100%; object-fit:cover; }
 .journey-body p{ color:var(--ivory-dim); font-size:1.08rem; line-height:1.85; max-width:62ch; margin-bottom:60px; }
 .journey-timeline{ display:flex; flex-direction:column; gap:26px; margin-bottom:90px; }
 .journey-timeline .row{ display:flex; gap:26px; align-items:baseline; padding-bottom:26px; border-bottom:1px solid var(--line); }
@@ -195,7 +193,7 @@ nav.nav-hidden{ transform:translateY(-100%); }
   position:relative; min-height:88vh; display:flex; align-items:flex-end;
   margin-bottom:70px; border:1px solid var(--line); overflow:hidden;
 }
-.case-study img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.55) saturate(0.9); }
+.case-study img, .case-study video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.55) saturate(0.9); }
 .case-study-content{ position:relative; z-index:2; padding:56px; width:100%; }
 .case-study-tag{ font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:block; }
 .case-study h3{ font-size:clamp(2rem,4.6vw,4rem); line-height:1.05; max-width:14ch; }
@@ -224,8 +222,8 @@ nav.nav-hidden{ transform:translateY(-100%); }
   position:relative; width:min(70vw, 460px); aspect-ratio:16/10; flex-shrink:0; overflow:hidden;
   cursor:pointer; background:#1c1815;
 }
-.film-card img{ width:100%; height:100%; object-fit:cover; filter:grayscale(30%) brightness(0.75); transition:transform 0.6s ease, filter 0.5s ease; }
-.film-card:hover img{ transform:scale(1.06); filter:grayscale(0%) brightness(0.9); }
+.film-card img, .film-card video{ width:100%; height:100%; object-fit:cover; filter:grayscale(30%) brightness(0.75); transition:transform 0.6s ease, filter 0.5s ease; }
+.film-card:hover img, .film-card:hover video{ transform:scale(1.06); filter:grayscale(0%) brightness(0.9); }
 .film-card-meta{ position:absolute; left:24px; bottom:22px; right:24px; }
 .film-card-year{ font-size:0.72rem; letter-spacing:0.1em; color:var(--ivory-dim); margin-bottom:8px; display:block; }
 .film-card h4{ font-size:1.5rem; line-height:1.2; }
@@ -238,19 +236,20 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .film-card .play::before{ content:""; width:0; height:0; border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:9px solid var(--ivory); margin-left:3px; }
 .film-card:hover .play{ opacity:1; transform:scale(1); }
 
-/* ============ COMMERCIAL ============ */
-.commercial{ padding:120px 5vw; border-top:1px solid var(--line); }
-.commercial-intro{ max-width:640px; margin-bottom:70px; }
-.commercial-intro h2{ font-size:clamp(2rem,3.6vw,3rem); line-height:1.15; margin-top:10px; }
-.commercial-intro p{ color:var(--ivory-dim); font-size:1.05rem; line-height:1.7; margin-top:22px; max-width:58ch; }
-.service-rows{ border-top:1px solid var(--line); }
-.service-row{ display:grid; grid-template-columns:60px 1fr 2fr; gap:32px; padding:36px 0; border-bottom:1px solid var(--line); align-items:baseline; }
-.service-row .idx{ font-family:ui-monospace,monospace; color:var(--gold-dim); font-size:0.85rem; }
-.service-row h4{ font-size:1.3rem; }
-.service-row p{ color:var(--ivory-dim); font-size:0.95rem; line-height:1.6; max-width:52ch; }
-@media (max-width:820px){ .service-row{ grid-template-columns:1fr; gap:10px; } }
+/* ============ COMMERCIAL (condensed) ============ */
+.commercial{ padding:90px 5vw; border-top:1px solid var(--line); }
+.commercial-intro{ max-width:560px; margin-bottom:44px; }
+.commercial-intro h2{ font-size:clamp(1.7rem,2.8vw,2.3rem); line-height:1.2; margin-top:10px; }
+.commercial-intro p{ color:var(--ivory-dim); font-size:0.98rem; line-height:1.6; margin-top:14px; max-width:52ch; }
+.service-rows{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+.service-row{ background:var(--ink); padding:26px 22px; }
+.service-row .idx{ font-family:ui-monospace,monospace; color:var(--gold-dim); font-size:0.78rem; display:block; margin-bottom:12px; }
+.service-row h4{ font-size:1.05rem; line-height:1.25; margin-bottom:8px; }
+.service-row p{ color:var(--ivory-dim); font-size:0.82rem; line-height:1.5; }
+@media (max-width:820px){ .service-rows{ grid-template-columns:1fr 1fr; } }
+@media (max-width:520px){ .service-rows{ grid-template-columns:1fr; } }
 
-.reel-wrap{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 0; overflow:hidden; white-space:nowrap; margin-top:90px; }
+.reel-wrap{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; overflow:hidden; white-space:nowrap; margin-top:50px; }
 .reel{ display:inline-flex; animation:scroll 46s linear infinite; }
 .reel span{ font-family:'Fraunces', serif; font-size:1.2rem; color:var(--ivory-dim); padding:0 40px; letter-spacing:0.01em; white-space:nowrap; }
 .reel span b{ color:var(--ivory); font-weight:500; }
@@ -310,19 +309,6 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .quote-break blockquote{ font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(1.6rem, 3.6vw, 2.6rem); line-height:1.35; max-width:19ch; margin:0 auto 28px; }
 .quote-break cite{ font-style:normal; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
 
-/* ============ JOURNAL ============ */
-.journal{ padding:140px 5vw; border-top:1px solid var(--line); background:#0f0d0b; }
-.journal-intro{ max-width:640px; margin-bottom:70px; }
-.journal-intro h2{ font-size:clamp(2rem,3.6vw,3rem); line-height:1.15; margin-top:10px; }
-.journal-intro p{ color:var(--ivory-dim); font-size:1.05rem; line-height:1.7; margin-top:22px; max-width:58ch; }
-.journal-list{ border-top:1px solid var(--line); }
-.journal-row{ display:grid; grid-template-columns:1fr auto; gap:24px; padding:40px 0; border-bottom:1px solid var(--line); align-items:baseline; }
-.journal-row .cat{ font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:14px; }
-.journal-row h4{ font-size:1.5rem; line-height:1.3; max-width:44ch; }
-.journal-row p{ color:var(--ivory-dim); font-size:0.92rem; margin-top:10px; max-width:52ch; }
-.journal-row .status{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ivory-dim); border:1px solid var(--line); padding:6px 12px; white-space:nowrap; }
-@media (max-width:700px){ .journal-row{ grid-template-columns:1fr; } }
-
 /* ============ RECOGNITION ============ */
 .recognition{ padding:140px 5vw; border-top:1px solid var(--line); }
 .recognition-intro{ max-width:640px; margin-bottom:70px; }
@@ -338,9 +324,42 @@ nav.nav-hidden{ transform:translateY(-100%); }
 .video-modal{ position:fixed; inset:0; z-index:300; background:rgba(10,9,7,0.92); display:none; align-items:center; justify-content:center; padding:5vw; }
 .video-modal.is-open{ display:flex; }
 .video-modal-inner{ width:100%; max-width:960px; aspect-ratio:16/9; background:#000; position:relative; border:1px solid var(--line); }
-.video-modal-inner iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-modal-inner iframe, .video-modal-inner video{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 .video-modal-close{ position:absolute; top:-46px; right:0; color:var(--ivory); font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; gap:8px; }
 .video-modal-close:hover{ color:var(--gold); }
+
+/* ============ REELS SLIDER (Instagram / YouTube Shorts — Drive-ready) ============ */
+.reels-block{ margin-top:100px; }
+.reels-label-row{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:32px; }
+.reels-label{ font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim); }
+.reels-slider{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+  mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+}
+.reels-track{ display:flex; gap:14px; width:max-content; animation:marquee-slide 80s linear infinite; }
+.reels-track:hover{ animation-play-state:paused; }
+.reels-track.is-static{ animation:none; }
+.reel-card{
+  position:relative; width:min(46vw, 240px); aspect-ratio:9/16; flex-shrink:0; overflow:hidden;
+  border:1px solid var(--line); background:#1c1815; cursor:default;
+}
+.reel-card.media-trigger{ cursor:pointer; }
+.reel-card video, .reel-card img{ width:100%; height:100%; object-fit:cover; filter:grayscale(20%) brightness(0.85); transition:filter 0.4s ease; }
+.reel-card.media-trigger:hover video, .reel-card.media-trigger:hover img{ filter:grayscale(0%) brightness(1); }
+.reel-play{
+  position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--ivory); display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:scale(0.85); transition:all 0.25s ease;
+}
+.reel-card.media-trigger:hover .reel-play{ opacity:1; transform:scale(1); }
+.reel-play::before{ content:""; width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid var(--ivory); margin-left:3px; }
+.reel-badge{ position:absolute; top:14px; left:14px; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ivory); background:rgba(27,29,20,0.6); padding:4px 9px; border:1px solid var(--line); }
+.reel-placeholder{
+  width:min(70vw,320px); aspect-ratio:9/16; border:1px dashed var(--line); display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:24px; color:var(--ivory-dim); font-size:0.82rem; flex-shrink:0;
+}
+@media (max-width:820px){ .reel-card, .reel-placeholder{ width:min(60vw, 220px); } }
 
 /* ============ FOOTER ============ */
 footer{ padding:160px 5vw 60px; background:#0f0d0b; border-top:1px solid var(--line); text-align:center; }
@@ -358,13 +377,11 @@ footer h2{ font-size:clamp(2.2rem, 6vw, 4.5rem); max-width:16ch; margin:0 auto 4
 <div id="nav-slot"></div>
 <div id="rail-slot"></div>
 <div id="hero-slot"></div>
-<div id="prologue-slot"></div>
 <div id="journey-slot"></div>
 <div id="films-slot"></div>
 <div id="commercial-slot"></div>
 <div id="photography-slot"></div>
 <div id="conversations-slot"></div>
-<div id="journal-slot"></div>
 <div id="recognition-slot"></div>
 <div id="footer-slot"></div>
 
@@ -393,13 +410,15 @@ const SITE = {
     socials: { youtube: "@mostbooked", instagram: "@mostbooked", facebook: "@mostbooked" }
   },
 
+  // Rail links: on-page chapters use their section id. Journal has no section on
+  // this page anymore — point href at your actual journal/Substack/blog when ready.
   chapters: [
     { id: "journey", num: "01", label: "Journey" },
     { id: "films", num: "02", label: "Films" },
     { id: "commercial", num: "03", label: "Commercial" },
     { id: "photography", num: "04", label: "Photography" },
     { id: "conversations", num: "05", label: "Conversations" },
-    { id: "journal", num: "06", label: "Journal" },
+    { id: "journal", num: "06", label: "Journal", href: "https://your-journal-url.example" },
     { id: "recognition", num: "07", label: "Recognition" }
   ],
 
@@ -414,11 +433,8 @@ const SITE = {
     stat2_label: "Views generated in the last 30 days alone"
   },
 
-  prologue: {
-    statement: "I tell stories about people, ambition, business and culture — through documentaries, cinematic content and meaningful conversations."
-  },
-
   journey: {
+    founderPhoto: "",
     headline: "From a design tablet in 2012 to a studio across three continents.",
     body: "Mostbooked is built on one instinct: find the story before you point the camera. It started as graphic design in 2012, moved through photography and video, and grew into a studio that gives audiences real access to entrepreneurs, industry leaders, creators and cultural icons across Africa and beyond. The work isn't built for trends — it's long-form, trust-building storytelling made to actually connect with the people watching it.",
     timeline: [
@@ -439,6 +455,11 @@ const SITE = {
   },
 
   // ---------- FLAGSHIP DOCUMENTARY CASE STUDY ----------
+  // thumbSrc: a Cloudinary (or any hosted) video URL — it autoplays muted, looped,
+  //   on page load as the case-study background, silently, on a loop.
+  // videoId: a YouTube ID (after "v=") — if set, the modal plays this on click.
+  // videoSrc: a direct video URL (Cloudinary/Drive) — used in the modal instead
+  //   of videoId if you'd rather not use YouTube at all.
   // Replace the [ bracketed ] placeholders with the real specifics of this project —
   // they're deliberately left as prompts, not filled with invented details.
   flagshipFilm: {
@@ -447,30 +468,30 @@ const SITE = {
     client: "Obi Cubana",
     tag: "Documentary",
     image: "images/gallery-tug-of-war.jpg",
+    thumbSrc: "",
     videoId: "",
-    storyContext: "[ 2–3 sentences on how this story came about — what drew you to it, and what it's really about beneath the headline. ]",
-    process: "[ A short note on how it was shot — crew size, timeline, locations, and any creative decisions worth naming. ]",
-    impact: "[ Views, watch time, press pickup, or client outcome — whatever result this project is proudest of. ]"
+    videoSrc: ""
   },
 
   // ---------- MORE FILMS (filmstrip) ----------
   films: [
-    { year: "2025", title: "Chieftaincy", client: "Obi Cubana", tag: "Documentary", image: "images/gallery-behind-scenes.jpg", videoId: "" },
-    { year: "2024", title: "Nigeria MMA Promotion", client: "Kamaru Usman", tag: "Documentary", image: "images/gallery-creative-shoot.jpg", videoId: "" },
-    { year: "2025", title: "Quiet Giant", client: "Flavour", tag: "Documentary", image: "images/gallery-portrait-red.jpg", videoId: "" },
-    { year: "2023–2024", title: "O2 Arena, London", client: "Asake", tag: "Event / Production", image: "images/gallery-concert-lights.jpg", videoId: "" },
-    { year: "2023", title: "Dubai Concert Coverage", client: "Davido", tag: "Event / Production", image: "images/gallery-private-jet.jpg", videoId: "" },
-    { year: "Ongoing", title: "Mostbooked Podcast", client: "Various Guests", tag: "Podcast", image: "images/gallery-bw-profile.jpg", videoId: "" }
+    { year: "2025", title: "Chieftaincy", client: "Obi Cubana", tag: "Documentary", image: "images/gallery-behind-scenes.jpg", thumbSrc: "", videoId: "", videoSrc: "" },
+    { year: "2024", title: "Nigeria MMA Promotion", client: "Kamaru Usman", tag: "Documentary", image: "images/gallery-creative-shoot.jpg", thumbSrc: "", videoId: "", videoSrc: "" },
+    { year: "2025", title: "Quiet Giant", client: "Flavour", tag: "Documentary", image: "images/gallery-portrait-red.jpg", thumbSrc: "", videoId: "", videoSrc: "" },
+    { year: "2023–2024", title: "O2 Arena, London", client: "Asake", tag: "Event / Production", image: "images/gallery-concert-lights.jpg", thumbSrc: "", videoId: "", videoSrc: "" },
+    { year: "2023", title: "Dubai Concert Coverage", client: "Davido", tag: "Event / Production", image: "images/gallery-private-jet.jpg", thumbSrc: "", videoId: "", videoSrc: "" },
+    { year: "Ongoing", title: "Mostbooked Podcast", client: "Various Guests", tag: "Podcast", image: "images/gallery-bw-profile.jpg", thumbSrc: "", videoId: "", videoSrc: "" }
   ],
 
+  // ---------- COMMERCIAL (kept short on purpose) ----------
   commercial: {
-    headline: "Events, commercials and highlight films — shot with a documentary eye.",
-    intro: "This is the production arm of Mostbooked: the same instinct for story, applied to work with a deadline and a deliverable. Weddings, brand shoots, corporate events, commercials, highlight reels.",
+    headline: "Events, commercials & brand films.",
+    intro: "The production arm of Mostbooked — the same eye for story, built for a deadline.",
     services: [
-      { title: "Event Coverage", desc: "Full-day shoots for weddings, launches, concerts, and private events — multi-camera where needed, always story-led." },
-      { title: "Commercials & Brand Films", desc: "Short-form brand content built to convert — from concept to final cut." },
-      { title: "Highlight Reels", desc: "Fast-turnaround edits for social — the 60–90 second version of the day, made to be shared immediately." },
-      { title: "Corporate & Behind-the-Scenes", desc: "Documentary-style coverage of company milestones, launches, and internal culture content." }
+      { title: "Event Coverage", desc: "Weddings, launches, concerts" },
+      { title: "Commercials & Brand Films", desc: "Concept to final cut" },
+      { title: "Highlight Reels", desc: "60–90 second social edits" },
+      { title: "Corporate & BTS", desc: "Milestones & culture content" }
     ]
   },
 
@@ -510,12 +531,7 @@ const SITE = {
 
   conversations: {
     headline: "The Mostbooked Podcast.",
-    intro: "Candid, documentary-style conversations — not press-junket interviews. Guests range from creators and entrepreneurs to public figures with a story worth sitting down for.",
-    episodes: [
-      { title: "I Recorded My Father's Regret So I Wouldn't Inherit It", desc: "A Father's Day episode — a candid conversation with my own father." },
-      { title: "Dr. Princess Kelechi Oghene", desc: "A four-act conversation on purpose, medicine, and public life." },
-      { title: "Sefi", desc: "A conversation with one of the internet's most multi-faceted creators." }
-    ]
+    intro: "Candid, documentary-style conversations — not press-junket interviews. Guests range from creators and entrepreneurs to public figures with a story worth sitting down for."
   },
 
   quote: {
@@ -523,17 +539,17 @@ const SITE = {
     attribution: "Odira Ndubuaku"
   },
 
-  // ---------- JOURNAL (writing / thought leadership) ----------
-  // essay: a working title only — write the piece and link it when it's ready.
-  journal: {
-    headline: "Four kinds of stories, one instinct.",
-    intro: "Long-form ideas, in progress — the writing side of the same practice as the films: about people, ambition, business and culture.",
-    entries: [
-      { cat: "Success Stories", essay: "Why every founder has a story worth documenting", status: "Draft" },
-      { cat: "Business & Wealth", essay: "The business of storytelling", status: "Draft" },
-      { cat: "Documentary Storytelling", essay: "The psychology of visual storytelling", status: "Draft" },
-      { cat: "Lifestyle & Culture", essay: "The future of African storytelling", status: "Draft" }
-    ]
+  // ---------- SHORTS & CLIPS (reel slider — Google Drive-ready) ----------
+  // Same idea as Photography: put previewSeconds-long (or longer) vertical clips
+  // in a Drive folder, add driveFolderId + driveApiKey, and this slider updates
+  // on its own. You can also hand-add items to the "items" array below —
+  // those show alongside anything pulled from Drive.
+  // previewSeconds controls how much of each clip loops silently before someone clicks.
+  reels: {
+    driveFolderId: "",
+    driveApiKey: "",
+    previewSeconds: 8,
+    items: []
   },
 
   recognition: {
@@ -579,13 +595,18 @@ function initNavScrollHide(){
 function renderRail(){
   document.getElementById("rail-slot").innerHTML = `
     <div class="chapter-rail">
-      ${SITE.chapters.map(c => `
-        <a href="#${c.id}" data-rail="${c.id}">
-          <span class="label">${c.label}</span>
-          <span class="dash"></span>
-          <span class="num">${c.num}</span>
-        </a>
-      `).join("")}
+      ${SITE.chapters.map(c => {
+        const isExternal = !!c.href;
+        const href = c.href || `#${c.id}`;
+        const attrs = isExternal ? `target="_blank" rel="noopener"` : "";
+        return `
+          <a href="${href}" ${attrs} data-rail="${c.id}">
+            <span class="label">${c.label}${isExternal ? " ↗" : ""}</span>
+            <span class="dash"></span>
+            <span class="num">${c.num}</span>
+          </a>
+        `;
+      }).join("")}
     </div>
   `;
 }
@@ -612,28 +633,68 @@ function renderVideoModal(){
   el.id = "video-modal";
   el.innerHTML = `
     <div class="video-modal-inner">
-      <div class="video-modal-close" onclick="closeVideoModal()">Close ✕</div>
+      <div class="video-modal-close" onclick="closeMediaModal()">Close ✕</div>
       <iframe id="video-modal-frame" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <video id="video-modal-video" controls playsinline style="display:none;"></video>
     </div>
   `;
-  el.addEventListener("click", (e) => { if(e.target === el) closeVideoModal(); });
+  el.addEventListener("click", (e) => { if(e.target === el) closeMediaModal(); });
   document.body.appendChild(el);
-  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeVideoModal(); });
+  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMediaModal(); });
 }
-function openVideoModal(videoId){
-  if(!videoId) return;
+
+/* media = { videoId, videoSrc } — YouTube takes priority if both are set. */
+function openMediaModal(media){
   const modal = document.getElementById("video-modal");
   const frame = document.getElementById("video-modal-frame");
-  if(!modal || !frame) return;
-  frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  const video = document.getElementById("video-modal-video");
+  if(!modal || !frame || !video) return;
+
+  if(media.videoId){
+    video.pause(); video.removeAttribute("src"); video.style.display = "none";
+    frame.style.display = "block";
+    frame.src = `https://www.youtube.com/embed/${media.videoId}?autoplay=1&rel=0`;
+  }else if(media.videoSrc){
+    frame.style.display = "none"; frame.src = "";
+    video.style.display = "block";
+    video.src = media.videoSrc;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  }else{
+    return;
+  }
   modal.classList.add("is-open");
 }
-function closeVideoModal(){
+function closeMediaModal(){
   const modal = document.getElementById("video-modal");
   const frame = document.getElementById("video-modal-frame");
-  if(!modal || !frame) return;
+  const video = document.getElementById("video-modal-video");
+  if(!modal) return;
   modal.classList.remove("is-open");
-  frame.src = "";
+  if(frame) frame.src = "";
+  if(video){ video.pause(); video.removeAttribute("src"); video.load(); }
+}
+
+/* Wires click-to-play on any ".media-trigger" element that isn't already wired —
+   safe to call repeatedly (e.g. after Drive content loads in asynchronously). */
+function wireMediaTriggers(root = document){
+  root.querySelectorAll(".media-trigger:not([data-wired])").forEach(el => {
+    el.dataset.wired = "1";
+    el.style.cursor = "pointer";
+    el.addEventListener("click", () => {
+      openMediaModal({ videoId: el.dataset.videoId, videoSrc: el.dataset.videoSrc });
+    });
+  });
+}
+
+/* Caps a looping preview <video> to its first N seconds (data-preview),
+   so a long clip still behaves like a short, silent thumbnail loop. */
+function initPreviewLoops(root = document){
+  root.querySelectorAll("video[data-preview]:not([data-loop-wired])").forEach(v => {
+    v.dataset.loopWired = "1";
+    const sec = parseFloat(v.dataset.preview) || 8;
+    v.addEventListener("timeupdate", () => { if(v.currentTime > sec) v.currentTime = 0; });
+  });
 }
 
 function renderHero(){
@@ -656,15 +717,6 @@ function renderHero(){
   `;
 }
 
-function renderPrologue(){
-  document.getElementById("prologue-slot").innerHTML = `
-    <section class="prologue">
-      <div class="chapter-mark reveal"><span class="num">00</span><span class="name">Prologue</span></div>
-      <blockquote class="reveal">"${SITE.prologue.statement}"</blockquote>
-    </section>
-  `;
-}
-
 function renderJourney(){
   const j = SITE.journey;
   document.getElementById("journey-slot").innerHTML = `
@@ -673,6 +725,7 @@ function renderJourney(){
         <div class="journey-pin">
           <div class="chapter-mark reveal"><span class="num">01</span><span class="name">Journey</span></div>
           <h2 class="reveal">${j.headline}</h2>
+          <div class="journey-photo reveal">${j.founderPhoto ? `<img src="${j.founderPhoto}" alt="Odira Ndubuaku">` : "[ Founder portrait goes here ]"}</div>
         </div>
         <div>
           <div class="journey-body reveal"><p>${j.body}</p></div>
@@ -690,8 +743,18 @@ function renderJourney(){
   `;
 }
 
+/* Returns the markup for a media thumbnail: a looping muted video preview
+   if thumbSrc is set, otherwise the static fallback image. */
+function mediaThumb(item, previewSeconds){
+  if(item.thumbSrc){
+    return `<video class="thumb-preview" data-preview="${previewSeconds}" autoplay muted loop playsinline preload="metadata" poster="${item.image || ""}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
+  }
+  return `<img src="${item.image}" alt="${item.title}">`;
+}
+
 function renderFilms(){
   const f = SITE.flagshipFilm;
+  const clickable = !!(f.videoId || f.videoSrc);
   document.getElementById("films-slot").innerHTML = `
     <section class="films-chapter" id="films" data-rail-target="films">
       <div class="films-intro">
@@ -700,37 +763,37 @@ function renderFilms(){
         <p class="reveal">Cinematic, long-form work made to educate and move people — not just entertain them for a few seconds.</p>
       </div>
 
-      <div class="case-study reveal" ${f.videoId ? `onclick="openVideoModal('${f.videoId}')" style="cursor:pointer;"` : ""}>
-        <img src="${f.image}" alt="${f.title}">
+      <div class="case-study reveal ${clickable ? "media-trigger" : ""}" ${clickable ? `data-video-id="${f.videoId}" data-video-src="${f.videoSrc}" style="cursor:pointer;"` : ""}>
+        ${mediaThumb(f, 8)}
         <div class="case-study-content">
           <span class="case-study-tag">${f.tag} · ${f.year}</span>
           <h3>${f.title} <span class="client">— ${f.client}</span></h3>
-          <div class="case-study-watch">Watch the trailer</div>
+          ${clickable ? `<div class="case-study-watch">Watch the trailer</div>` : ""}
         </div>
-      </div>
-      <div class="case-detail-grid">
-        <div class="case-detail reveal"><h4>Story context</h4><p>${f.storyContext}</p></div>
-        <div class="case-detail reveal"><h4>Creative process</h4><p>${f.process}</p></div>
-        <div class="case-detail reveal"><h4>Impact</h4><p>${f.impact}</p></div>
       </div>
 
       <div class="filmstrip-wrap">
         <div class="filmstrip-label reveal">More from the studio</div>
         <div class="filmstrip-track" id="filmstrip-track">
-          ${SITE.films.map(film => `
-            <div class="film-card" ${film.videoId ? `onclick="openVideoModal('${film.videoId}')"` : ""}>
-              <img src="${film.image}" alt="${film.title}">
-              <div class="play"></div>
+          ${SITE.films.map(film => {
+            const filmClickable = !!(film.videoId || film.videoSrc);
+            return `
+            <div class="film-card ${filmClickable ? "media-trigger" : ""}" ${filmClickable ? `data-video-id="${film.videoId}" data-video-src="${film.videoSrc}"` : ""}>
+              ${mediaThumb(film, 8)}
+              ${filmClickable ? `<div class="play"></div>` : ""}
               <div class="film-card-meta">
                 <span class="film-card-year">${film.year} · ${film.tag}</span>
                 <h4>${film.title} <span class="client">— ${film.client}</span></h4>
               </div>
             </div>
-          `).join("")}
+          `;
+          }).join("")}
         </div>
       </div>
     </section>
   `;
+  wireMediaTriggers();
+  initPreviewLoops();
 }
 
 function renderCommercial(){
@@ -745,7 +808,7 @@ function renderCommercial(){
       <div class="service-rows">
         ${c.services.map((s,i) => `
           <div class="service-row reveal">
-            <div class="idx">0${i+1}</div>
+            <span class="idx">0${i+1}</span>
             <h4>${s.title}</h4>
             <p>${s.desc}</p>
           </div>
@@ -831,39 +894,86 @@ function renderConversations(){
         <h2 class="reveal">${c.headline}</h2>
         <p class="reveal">${c.intro}</p>
       </div>
-      <div class="episode-list">
-        ${c.episodes.map(e => `<div class="episode-row reveal"><h4>${e.title}</h4><p>${e.desc}</p></div>`).join("")}
+      <div class="reels-block">
+        <div class="reels-label-row reveal">
+          <span class="reels-label">Shorts & Clips</span>
+          <div class="drive-status" id="reels-drive-status"><span class="dot"></span><span id="reels-drive-status-text">Loading…</span></div>
+        </div>
+        <div class="reels-slider">
+          <div class="reels-track" id="reels-track"></div>
+        </div>
       </div>
+
       <div class="quote-break reveal">
         <blockquote>"${SITE.quote.text}"</blockquote>
         <cite>— ${SITE.quote.attribution}</cite>
       </div>
     </section>
   `;
+  loadReels();
 }
 
-function renderJournal(){
-  const j = SITE.journal;
-  document.getElementById("journal-slot").innerHTML = `
-    <section class="journal" id="journal" data-rail-target="journal">
-      <div class="journal-intro">
-        <div class="chapter-mark reveal"><span class="num">06</span><span class="name">Journal</span></div>
-        <h2 class="reveal">${j.headline}</h2>
-        <p class="reveal">${j.intro}</p>
-      </div>
-      <div class="journal-list">
-        ${j.entries.map(e => `
-          <div class="journal-row reveal">
-            <div>
-              <span class="cat">${e.cat}</span>
-              <h4>${e.essay}</h4>
-            </div>
-            <div class="status">${e.status}</div>
-          </div>
-        `).join("")}
-      </div>
-    </section>
-  `;
+/* Pulls short vertical clips from a Drive folder if configured, merges with
+   any manually-added SITE.reels.items, and falls back to a single placeholder
+   card if there's nothing to show yet. */
+async function loadReels(){
+  const cfg = SITE.reels;
+  const statusEl = document.getElementById("reels-drive-status");
+  const statusText = document.getElementById("reels-drive-status-text");
+  let items = (cfg.items || []).slice();
+  let live = false;
+
+  if(cfg.driveFolderId && cfg.driveApiKey){
+    try{
+      const q = encodeURIComponent(`'${cfg.driveFolderId}' in parents and mimeType contains 'video/' and trashed = false`);
+      const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,thumbnailLink)&orderBy=name&key=${cfg.driveApiKey}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if(data.files && data.files.length){
+        const driveItems = data.files.map(f => ({
+          videoSrc: `https://drive.google.com/uc?export=download&id=${f.id}`,
+          poster: f.thumbnailLink || "",
+          title: f.name,
+          platform: ""
+        }));
+        items = driveItems.concat(items);
+        live = true;
+      }
+    }catch(err){
+      console.warn("Mostbooked: could not load the Drive reels folder.", err);
+    }
+  }
+
+  const track = document.getElementById("reels-track");
+  if(track){
+    if(items.length === 0){
+      track.classList.add("is-static");
+      track.innerHTML = `<div class="reel-placeholder">[ Add Instagram/YouTube Shorts to SITE.reels.items, or connect a Google Drive folder, to populate this slider ]</div>`;
+    }else{
+      track.classList.remove("is-static");
+      const doubled = items.length > 2 ? items.concat(items) : items;
+      track.innerHTML = doubled.map(r => `
+        <div class="reel-card media-trigger" data-video-id="" data-video-src="${r.videoSrc}">
+          ${r.poster
+            ? `<img src="${r.poster}" alt="${r.title || "Reel"}">`
+            : `<video class="thumb-preview" data-preview="${cfg.previewSeconds || 8}" autoplay muted loop playsinline preload="metadata"><source src="${r.videoSrc}" type="video/mp4"></video>`}
+          ${r.platform ? `<span class="reel-badge">${r.platform}</span>` : ""}
+          <div class="reel-play"></div>
+        </div>
+      `).join("");
+    }
+  }
+
+  if(statusEl && statusText){
+    statusEl.classList.toggle("is-live", live);
+    statusText.textContent = live
+      ? "Synced automatically from Google Drive"
+      : (items.length ? "Showing added clips" : "Nothing connected yet");
+  }
+
+  wireMediaTriggers();
+  initPreviewLoops();
+  if(typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
 }
 
 function renderRecognition(){
@@ -952,13 +1062,11 @@ renderRail();
 renderRecTimer();
 renderVideoModal();
 renderHero();
-renderPrologue();
 renderJourney();
 renderFilms();
 renderCommercial();
 renderPhotography();
 renderConversations();
-renderJournal();
 renderRecognition();
 renderFooter();
 
