@@ -38,17 +38,15 @@ a{color:inherit; text-decoration:none;}
 /* ============ NAV + BLOB SWITCH ============ */
 nav{
   position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; justify-content:space-between; align-items:center;
+  display:flex; justify-content:center; align-items:center;
   padding:22px 5vw;
   background:linear-gradient(to bottom, rgba(20,18,16,0.9), transparent);
   transition:transform 0.4s cubic-bezier(0.2,0.6,0.2,1);
 }
 nav.nav-hidden{transform:translateY(-100%);}
-.logo{font-family:'Fraunces', serif; font-size:1.05rem; letter-spacing:0.02em;}
-.logo span{color:var(--gold);}
 
 .blob-switch{
-  position:relative; display:flex; align-items:center;
+  position:relative; display:inline-flex; align-items:center;
   background:rgba(233,228,209,0.06);
   border:1px solid var(--line);
   border-radius:999px;
@@ -57,20 +55,19 @@ nav.nav-hidden{transform:translateY(-100%);}
 }
 .blob-switch .blob{
   position:absolute; top:4px; bottom:4px; left:4px;
-  width:calc(50% - 4px);
+  width:60px;
   background:var(--gold);
   border-radius:999px;
-  transition:transform 0.55s cubic-bezier(0.65,-0.15,0.2,1.35), border-radius 0.55s ease;
+  transition:transform 0.55s cubic-bezier(0.65,-0.15,0.2,1.35), width 0.55s cubic-bezier(0.65,-0.15,0.2,1.35);
   z-index:0;
 }
-.blob-switch.pos-mostbooked .blob{ transform:translateX(100%); }
 .blob-switch button{
   position:relative; z-index:1; border:none; background:transparent; cursor:pointer;
   font-family:'Inter',sans-serif; font-size:0.76rem; letter-spacing:0.06em; text-transform:uppercase;
-  padding:9px 20px; color:var(--ivory-dim); transition:color 0.35s ease;
+  padding:9px 22px; color:var(--ivory-dim); transition:color 0.35s ease; white-space:nowrap;
 }
 .blob-switch button.is-active{ color:var(--ink); font-weight:600; }
-@media (max-width:640px){ .blob-switch button{padding:8px 13px; font-size:0.65rem;} .logo{font-size:0.9rem;} }
+@media (max-width:640px){ .blob-switch button{padding:8px 15px; font-size:0.65rem;} }
 
 /* ============ CHAPTER MARK ============ */
 .chapter-mark{display:flex; align-items:baseline; gap:16px; margin-bottom:22px;}
@@ -173,7 +170,7 @@ nav.nav-hidden{transform:translateY(-100%);}
 .stories-intro h2{font-size:clamp(2rem,3.6vw,3rem); line-height:1.15; margin-top:10px;}
 .stories-intro p{color:var(--ivory-dim); font-size:1.02rem; line-height:1.7; margin-top:18px; max-width:56ch;}
 .stories-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:120px;}
-.story-card{position:relative; aspect-ratio:4/5; overflow:hidden; cursor:pointer; background:#1c1815;}
+.story-card{position:relative; aspect-ratio:16/9; overflow:hidden; cursor:pointer; background:#1c1815;}
 .story-card img, .story-card video{width:100%; height:100%; object-fit:cover; filter:grayscale(25%) brightness(0.62); transition:transform 0.6s ease, filter 0.5s ease;}
 .story-card:hover img, .story-card:hover video{transform:scale(1.05); filter:grayscale(0%) brightness(0.8);}
 .story-card-content{position:absolute; left:30px; bottom:28px; right:30px;}
@@ -403,7 +400,7 @@ const MOSTBOOKED = {
   }
 };
 
-let MODE = "odira"; // "odira" | "mostbooked"
+let MODE = "mostbooked"; // "mostbooked" | "odira"
 
 /* ---------------- helpers ---------------- */
 function mediaThumb(item, previewSeconds){
@@ -425,11 +422,10 @@ function parseCloudinaryUrl(url){
 function renderNav(){
   document.getElementById("nav-slot").innerHTML = `
     <nav>
-      <a href="#" class="logo" onclick="return false;">ODIRA<span> / MOSTBOOKED</span></a>
-      <div class="blob-switch ${MODE==='mostbooked'?'pos-mostbooked':''}" id="blob-switch">
-        <div class="blob"></div>
-        <button data-set="odira" class="${MODE==='odira'?'is-active':''}">Odira</button>
+      <div class="blob-switch" id="blob-switch">
+        <div class="blob" id="blob-indicator"></div>
         <button data-set="mostbooked" class="${MODE==='mostbooked'?'is-active':''}">Mostbooked</button>
+        <button data-set="odira" class="${MODE==='odira'?'is-active':''}">Odira</button>
       </div>
     </nav>
   `;
@@ -437,7 +433,16 @@ function renderNav(){
     b.addEventListener("click", ()=> setMode(b.dataset.set));
   });
   initNavScrollHide();
+  positionBlob();
 }
+function positionBlob(){
+  const activeBtn = document.querySelector(".blob-switch button.is-active");
+  const blob = document.getElementById("blob-indicator");
+  if(!activeBtn || !blob) return;
+  blob.style.width = activeBtn.offsetWidth + "px";
+  blob.style.transform = `translateX(${activeBtn.offsetLeft - 4}px)`;
+}
+window.addEventListener("resize", positionBlob);
 function initNavScrollHide(){
   const nav = document.querySelector("nav");
   if(!nav || nav.dataset.wired) { if(nav) return; }
@@ -460,6 +465,7 @@ function setMode(mode){
   renderFooter();
   window.requestAnimationFrame(initMotion);
 }
+window.addEventListener("load", positionBlob);
 
 /* ---------------- shared bits ---------------- */
 function renderRecTimer(){
