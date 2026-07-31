@@ -82,13 +82,13 @@ nav.nav-scrolled{
   transition:transform 0.55s cubic-bezier(0.65,-0.15,0.2,1.35), width 0.55s cubic-bezier(0.65,-0.15,0.2,1.35);
   z-index:0;
 }
-.blob-switch button{
+.blob-switch a{
   position:relative; z-index:1; border:none; background:transparent; cursor:pointer;
   font-family:'Inter',sans-serif; font-size:0.76rem; letter-spacing:0.06em; text-transform:uppercase;
-  padding:9px 22px; color:var(--ivory-dim); transition:color 0.35s ease; white-space:nowrap;
+  padding:9px 22px; color:var(--ivory-dim); transition:color 0.35s ease; white-space:nowrap; display:inline-block;
 }
-.blob-switch button.is-active{ color:var(--ink); font-weight:600; }
-@media (max-width:640px){ .blob-switch button{padding:8px 15px; font-size:0.65rem;} }
+.blob-switch a.is-active{ color:var(--ink); font-weight:600; }
+@media (max-width:640px){ .blob-switch a{padding:8px 15px; font-size:0.65rem;} }
 
 /* ============ CHAPTER MARK ============ */
 .chapter-mark{display:flex; align-items:baseline; gap:16px; margin-bottom:22px;}
@@ -462,19 +462,16 @@ function renderNav(){
     <nav>
       <div class="blob-switch" id="blob-switch">
         <div class="blob" id="blob-indicator"></div>
-        <button data-set="mostbooked" class="${MODE==='mostbooked'?'is-active':''}">Mostbooked</button>
-        <button data-set="odira" class="${MODE==='odira'?'is-active':''}">Odira</button>
+        <a href="index.html" class="${MODE==='mostbooked'?'is-active':''}">Mostbooked</a>
+        <a href="odira.html" class="${MODE==='odira'?'is-active':''}">Odira</a>
       </div>
     </nav>
   `;
-  document.querySelectorAll(".blob-switch button").forEach(b=>{
-    b.addEventListener("click", ()=> setMode(b.dataset.set));
-  });
   initNavScrollHide();
   positionBlob();
 }
 function positionBlob(){
-  const activeBtn = document.querySelector(".blob-switch button.is-active");
+  const activeBtn = document.querySelector(".blob-switch a.is-active");
   const blob = document.getElementById("blob-indicator");
   if(!activeBtn || !blob) return;
   blob.style.width = activeBtn.offsetWidth + "px";
@@ -487,34 +484,6 @@ function initNavScrollHide(){
   const update = ()=> nav.classList.toggle("nav-scrolled", window.scrollY > 80);
   update();
   window.addEventListener("scroll", update, { passive:true });
-}
-
-const PAGE_META = {
-  mostbooked: {
-    title: "Mostbooked — Documentary Studio | Odira Ndubuaku",
-    description: "Mostbooked is a documentary studio founded by cinematographer Odira Ndubuaku, creating cinematic founder and legacy documentaries for entrepreneurs, executives and cultural icons across Africa and beyond."
-  },
-  odira: {
-    title: "Odira Ndubuaku — Cinematographer & Documentary Storyteller",
-    description: "Odira Ndubuaku is a cinematographer, documentary storyteller and podcast host. See his show reel, vlogs, and Instagram reels & shorts, or get in touch."
-  }
-};
-function updateMeta(){
-  const m = PAGE_META[MODE];
-  if(!m) return;
-  document.title = m.title;
-  const desc = document.querySelector('meta[name="description"]');
-  if(desc) desc.setAttribute("content", m.description);
-}
-function setMode(mode){
-  if(mode === MODE) return;
-  MODE = mode;
-  window.scrollTo({ top:0, behavior:"instant" in document.documentElement.style ? "instant":"auto" });
-  renderNav();
-  renderPage();
-  renderFooter();
-  updateMeta();
-  window.requestAnimationFrame(initMotion);
 }
 window.addEventListener("load", positionBlob);
 
