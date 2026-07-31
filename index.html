@@ -794,11 +794,7 @@ function mbWho(){
       <div class="stat-grid">
         ${MOSTBOOKED.stats.map(st=>`<div class="stat-card reveal"><b>${st.value}</b><span>${st.label}</span></div>`).join("")}
       </div>
-    </section>
-    <div class="quote-break reveal">
-      <blockquote>"${MOSTBOOKED.quote.text}"</blockquote>
-      <cite>— ${MOSTBOOKED.quote.attribution}</cite>
-    </div>`;
+    </section>`;
 }
 function mbFinalCta(){
   const f = MOSTBOOKED.finalCta;
