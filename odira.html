@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odira Ndubuaku — Cinematographer &amp; Documentary Storyteller</title>
+<meta name="description" content="Odira Ndubuaku is a cinematographer, documentary storyteller and podcast host behind Mostbooked. See his show reel, vlogs, and Instagram reels & shorts, or get in touch.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mostbooked.com/odira.html">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Mostbooked">
+<meta property="og:title" content="Odira Ndubuaku — Cinematographer & Documentary Storyteller">
+<meta property="og:description" content="A cinematographer, documentary storyteller and podcast host who has spent over a decade learning to wait for the moment that tells the truth about a person or a place.">
+<meta property="og:url" content="https://mostbooked.com/odira.html">
+<meta property="og:locale" content="en_NG">
+<meta property="og:image" content="https://res.cloudinary.com/tgy6ic5m/video/upload/so_0/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Odira Ndubuaku — Cinematographer & Documentary Storyteller">
+<meta name="twitter:description" content="Show reel, vlogs, and Instagram reels & shorts from documentary storyteller Odira Ndubuaku.">
+<meta name="twitter:image" content="https://res.cloudinary.com/tgy6ic5m/video/upload/so_0/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1d14;
+  --ivory:#e9e4d1;
+  --ivory-dim:#a9a488;
+  --gold:#93A267;
+  --gold-dim:#5c6b3d;
+  --burgundy:#3d3423;
+  --line: rgba(233,228,209,0.14);
+  --clay:#a85c46;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:auto;}
+body{background:var(--ink); color:var(--ivory); font-family:'Inter', sans-serif; overflow-x:hidden;}
+h1,h2,h3,h4,.display{font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em;}
+a{color:inherit; text-decoration:none;}
+::selection{background:var(--gold-dim); color:var(--ivory);}
+
+.grain{
+  position:fixed; inset:-10%; z-index:250; pointer-events:none;
+  opacity:0.045; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation:grain-shift 1s steps(3) infinite;
+}
+@keyframes grain-shift{0%,100%{transform:translate(0,0);}33%{transform:translate(-1.5%,1%);}66%{transform:translate(1%,-1.5%);}}
+
+.reveal{opacity:0; transform:translateY(34px);}
+.reveal.is-visible{opacity:1; transform:translateY(0); transition:opacity 0.8s ease, transform 0.8s ease;}
+
+/* ============ NAV + BLOB SWITCH ============ */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; justify-content:center; align-items:center;
+  padding:22px 5vw;
+  background:linear-gradient(to bottom, rgba(20,18,16,0.9), transparent);
+  transition:background 0.4s ease, padding 0.4s ease;
+}
+nav.nav-scrolled{
+  background:rgba(15,13,11,0.82);
+  backdrop-filter:blur(10px);
+  padding:14px 5vw;
+  border-bottom:1px solid var(--line);
+}
+
+.blob-switch{
+  position:relative; display:inline-flex; align-items:center;
+  background:rgba(233,228,209,0.06);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:4px;
+  gap:2px;
+}
+.blob-switch .blob{
+  position:absolute; top:4px; bottom:4px; left:4px;
+  width:60px;
+  background:var(--gold);
+  border-radius:999px;
+  transition:transform 0.55s cubic-bezier(0.65,-0.15,0.2,1.35), width 0.55s cubic-bezier(0.65,-0.15,0.2,1.35);
+  z-index:0;
+}
+.blob-switch a{
+  position:relative; z-index:1; border:none; background:transparent; cursor:pointer;
+  font-family:'Inter',sans-serif; font-size:0.76rem; letter-spacing:0.06em; text-transform:uppercase;
+  padding:9px 22px; color:var(--ivory-dim); transition:color 0.35s ease; white-space:nowrap; display:inline-block;
+}
+.blob-switch a.is-active{ color:var(--ink); font-weight:600; }
+@media (max-width:640px){ .blob-switch a{padding:8px 15px; font-size:0.65rem;} }
+
+/* ============ CHAPTER MARK ============ */
+.chapter-mark{display:flex; align-items:baseline; gap:16px; margin-bottom:22px;}
+.chapter-mark .num{font-family:ui-monospace,monospace; font-size:0.85rem; color:var(--gold-dim); letter-spacing:0.05em;}
+.chapter-mark .name{font-size:0.78rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 5vw 45px; position:relative; overflow:hidden;}
+.hero-video, .hero-video-fallback{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
+.hero-video-fallback{
+  border:1px dashed var(--line); display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:24px; color:var(--ivory-dim); font-size:0.85rem;
+  background:radial-gradient(ellipse 340px 220px at 12% 18%, rgba(93,107,61,0.45), transparent 70%),
+             radial-gradient(ellipse 260px 300px at 85% 10%, rgba(61,52,35,0.55), transparent 70%), var(--ink);
+}
+.hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(27,29,20,0.35) 0%, rgba(27,29,20,0.55) 55%, rgba(27,29,20,0.94) 100%);}
+.hero > *:not(.hero-video):not(.hero-video-fallback):not(.hero-scrim){position:relative; z-index:2;}
+.hero-kicker{display:block; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;}
+.hero-name{font-size:clamp(2rem,7vw,4.4rem); line-height:1.05; margin:0; max-width:14ch;}
+.hero-sub{margin-top:22px; max-width:48ch; font-size:1.05rem; line-height:1.65; color:var(--ivory-dim);}
+.hero-ctas{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;}
+.btn-solid, .btn-line{font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; padding:14px 28px; cursor:pointer; transition:all 0.25s ease; display:inline-flex; align-items:center; gap:10px; border:none;}
+.btn-solid{background:var(--gold); color:var(--ink); font-weight:600;}
+.btn-solid:hover{transform:translateY(-2px);}
+.btn-line{background:transparent; border:1px solid var(--ivory); color:var(--ivory);}
+.btn-line:hover{background:var(--ivory); color:var(--ink);}
+.hero-meta{margin-top:44px; display:flex; gap:56px; font-size:0.8rem; letter-spacing:0.03em; color:var(--ivory-dim); flex-wrap:wrap;}
+.hero-meta div{border-left:1px solid var(--line); padding-left:18px;}
+.hero-meta b{display:block; color:var(--ivory); font-family:'Fraunces',serif; font-size:1.6rem; font-weight:400; margin-bottom:4px;}
+
+/* ============ ABOUT / JOURNEY ============ */
+.about-section{padding:120px 5vw; border-top:1px solid var(--line);}
+.about-grid{display:grid; grid-template-columns:280px 1fr; gap:80px;}
+.about-pin{position:sticky; top:140px; align-self:start;}
+.about-pin h2{font-size:clamp(2rem,3.6vw,3rem); line-height:1.1; margin-top:10px; max-width:9ch;}
+.about-photo{margin-top:36px; aspect-ratio:3/4; border:1px dashed var(--line); overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px; color:var(--ivory-dim); font-size:0.8rem;}
+.about-photo img{width:100%; height:100%; object-fit:cover;}
+.about-body p{color:var(--ivory-dim); font-size:1.08rem; line-height:1.85; max-width:62ch; margin-bottom:50px;}
+.timeline{display:flex; flex-direction:column; gap:26px; margin-bottom:20px;}
+.timeline .row{display:flex; gap:26px; align-items:baseline; padding-bottom:26px; border-bottom:1px solid var(--line);}
+.timeline .yr{font-family:'Fraunces',serif; color:var(--gold); min-width:64px; font-size:1.2rem;}
+.timeline .desc{color:var(--ivory-dim); font-size:1rem;}
+
+/* ============ SHOW REEL (single feature block) ============ */
+.showreel{padding:0 5vw 140px; border-top:1px solid var(--line); padding-top:100px;}
+.showreel-intro{max-width:640px; margin-bottom:50px;}
+.showreel-intro h2{font-size:clamp(2rem,3.6vw,3rem); line-height:1.15; margin-top:10px;}
+.showreel-intro p{color:var(--ivory-dim); font-size:1.02rem; line-height:1.7; margin-top:18px; max-width:56ch;}
+.showreel-frame{position:relative; min-height:78vh; display:flex; align-items:flex-end; border:1px solid var(--line); overflow:hidden; cursor:pointer;}
+.showreel-frame video, .showreel-frame img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.55) saturate(0.9);}
+.showreel-content{position:relative; z-index:2; padding:50px;}
+.showreel-play{display:inline-flex; align-items:center; gap:12px; border:1px solid var(--ivory); padding:12px 24px; font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase;}
+.showreel-play::before{content:""; width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid currentColor;}
+
+/* ============ REELS / VLOGS SLIDER ============ */
+.reel-chapter{padding:100px 5vw 40px; border-top:1px solid var(--line); background:#0f0d0b;}
+.reel-chapter-intro{max-width:600px; margin-bottom:40px;}
+.reel-chapter-intro h2{font-size:clamp(1.8rem,3.2vw,2.6rem); line-height:1.15; margin-top:10px;}
+.reel-chapter-intro p{color:var(--ivory-dim); font-size:0.98rem; line-height:1.65; margin-top:14px; max-width:52ch;}
+.reels-slider{overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,black 4%,black 96%,transparent); mask-image:linear-gradient(90deg,transparent,black 4%,black 96%,transparent); padding-bottom:80px;}
+.reels-track{display:flex; gap:14px; width:max-content; animation:marquee-slide 80s linear infinite;}
+.reels-track:hover{animation-play-state:paused;}
+.reel-card{position:relative; width:min(46vw,230px); aspect-ratio:9/16; flex-shrink:0; overflow:hidden; border:1px solid var(--line); background:#1c1815; cursor:pointer;}
+.reel-card video, .reel-card img{width:100%; height:100%; object-fit:cover; filter:grayscale(20%) brightness(0.85); transition:filter 0.4s ease;}
+.reel-card:hover video, .reel-card:hover img{filter:grayscale(0%) brightness(1);}
+.reel-play{position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%; border:1px solid var(--ivory); display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(0.85); transition:all 0.25s ease;}
+.reel-card:hover .reel-play{opacity:1; transform:scale(1);}
+.reel-play::before{content:""; width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid var(--ivory); margin-left:3px;}
+.reel-badge{position:absolute; top:14px; left:14px; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ivory); background:rgba(27,29,20,0.6); padding:4px 9px; border:1px solid var(--line);}
+@keyframes marquee-slide{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+/* Vlogs — wide filmstrip, distinct from vertical reels */
+.filmstrip-wrap{padding-bottom:100px; position:relative; max-width:100vw; overflow:hidden;}
+.filmstrip-nav{display:flex; gap:10px; padding:0 5vw; margin-bottom:24px;}
+.filmstrip-nav button{
+  width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+  background:rgba(233,228,209,0.04); color:var(--ivory); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all 0.25s ease; font-size:1.1rem;
+}
+.filmstrip-nav button:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+.filmstrip-nav button:disabled{opacity:0.3; cursor:default; background:transparent; color:var(--ivory);}
+.filmstrip-track{
+  display:flex; gap:2px; padding-left:5vw; padding-right:5vw;
+  max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;
+}
+.filmstrip-track::-webkit-scrollbar{display:none;}
+.film-card{position:relative; width:min(70vw,460px); aspect-ratio:16/10; flex-shrink:0; overflow:hidden; cursor:pointer; background:#1c1815;}
+.film-card img, .film-card video{width:100%; height:100%; object-fit:cover; filter:grayscale(30%) brightness(0.75); transition:transform 0.6s ease, filter 0.5s ease;}
+.film-card:hover img, .film-card:hover video{transform:scale(1.06); filter:grayscale(0%) brightness(0.9);}
+.film-card-meta{position:absolute; left:24px; bottom:22px; right:24px;}
+.film-card-year{font-size:0.72rem; letter-spacing:0.1em; color:var(--ivory-dim); margin-bottom:8px; display:block;}
+.film-card h4{font-size:1.4rem; line-height:1.2;}
+.film-card .tag-em{font-style:italic; color:var(--gold); font-weight:400;}
+.film-card .play{position:absolute; top:22px; right:22px; width:40px; height:40px; border-radius:50%; border:1px solid var(--ivory); display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(0.85); transition:all 0.25s ease;}
+.film-card .play::before{content:""; width:0; height:0; border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:9px solid var(--ivory); margin-left:3px;}
+.film-card:hover .play{opacity:1; transform:scale(1);}
+
+/* ============ CONTACT ============ */
+.contact-section{padding:150px 5vw 100px; border-top:1px solid var(--line); text-align:center;}
+.contact-section h2{font-size:clamp(2.2rem,6vw,4rem); max-width:16ch; margin:0 auto 20px; line-height:1.05;}
+.contact-section p{color:var(--ivory-dim); font-size:1.02rem; max-width:50ch; margin:0 auto 40px;}
+.contact-links{display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:60px;}
+.contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); max-width:900px; margin:0 auto;}
+.contact-card{background:var(--ink); padding:34px 24px;}
+.contact-card h4{font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px;}
+.contact-card p, .contact-card a{color:var(--ivory-dim); font-size:0.95rem; line-height:1.6;}
+@media (max-width:820px){.contact-grid{grid-template-columns:1fr;}}
+
+/* ============ MOSTBOOKED: FEATURED STORIES ============ */
+.stories-chapter{padding:120px 5vw 60px; border-top:1px solid var(--line); background:#0f0d0b;}
+.stories-intro{max-width:640px; margin-bottom:60px;}
+.stories-intro h2{font-size:clamp(2rem,3.6vw,3rem); line-height:1.15; margin-top:10px;}
+.stories-intro p{color:var(--ivory-dim); font-size:1.02rem; line-height:1.7; margin-top:18px; max-width:56ch;}
+.stories-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:120px;}
+.story-card{position:relative; aspect-ratio:16/9; overflow:hidden; cursor:pointer; background:#1c1815;}
+.story-card img, .story-card video{width:100%; height:100%; object-fit:cover; filter:grayscale(25%) brightness(0.62); transition:transform 0.6s ease, filter 0.5s ease;}
+.story-card:hover img, .story-card:hover video{transform:scale(1.05); filter:grayscale(0%) brightness(0.8);}
+.story-card-content{position:absolute; left:30px; bottom:28px; right:30px;}
+.story-card-tag{font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; display:block;}
+.story-card h3{font-size:clamp(1.5rem,2.6vw,2.2rem); line-height:1.15;}
+@media (max-width:820px){.stories-grid{grid-template-columns:1fr;}}
+
+/* ============ MOSTBOOKED: WHY / SERVICES / WHO ============ */
+.why-section{padding:100px 5vw; border-top:1px solid var(--line);}
+.why-intro{max-width:640px; margin-bottom:50px;}
+.why-intro h2{font-size:clamp(1.9rem,3.4vw,2.7rem); line-height:1.2; margin-top:10px;}
+.why-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+.why-card{background:var(--ink); padding:30px 20px;}
+.why-card .idx{font-family:ui-monospace,monospace; color:var(--gold-dim); font-size:0.75rem; display:block; margin-bottom:14px;}
+.why-card p{color:var(--ivory-dim); font-size:0.92rem; line-height:1.55;}
+@media (max-width:900px){.why-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.why-grid{grid-template-columns:1fr;}}
+
+.services-section{padding:90px 5vw; border-top:1px solid var(--line); background:#0f0d0b;}
+.services-intro{max-width:560px; margin-bottom:44px;}
+.services-intro h2{font-size:clamp(1.9rem,3.4vw,2.7rem); line-height:1.2; margin-top:10px;}
+.service-rows{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+.service-row{background:#0f0d0b; padding:30px 24px;}
+.service-row .idx{font-family:ui-monospace,monospace; color:var(--gold-dim); font-size:0.78rem; display:block; margin-bottom:12px;}
+.service-row h4{font-size:1.1rem; line-height:1.25; margin-bottom:8px;}
+.service-row p{color:var(--ivory-dim); font-size:0.86rem; line-height:1.5;}
+@media (max-width:820px){.service-rows{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.service-rows{grid-template-columns:1fr;}}
+
+.who-section{padding:90px 5vw; border-top:1px solid var(--line); text-align:center;}
+.who-section h2{font-size:clamp(1.9rem,3.4vw,2.7rem); margin-bottom:34px;}
+.who-pills{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:760px; margin:0 auto;}
+.who-pills span{border:1px solid var(--line); padding:10px 20px; font-size:0.86rem; color:var(--ivory-dim); border-radius:999px;}
+
+.stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin:70px 0;}
+.stat-card{background:var(--ink); padding:36px 26px;}
+.stat-card b{display:block; font-family:'Fraunces',serif; font-size:2rem; font-weight:400; color:var(--gold); margin-bottom:8px;}
+.stat-card span{font-size:0.82rem; color:var(--ivory-dim); line-height:1.5;}
+@media (max-width:820px){.stat-grid{grid-template-columns:1fr 1fr;}}
+
+.quote-break{padding:100px 5vw 20px; text-align:center; border-top:1px solid var(--line);}
+.quote-break blockquote{font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(1.5rem,3.4vw,2.4rem); line-height:1.35; max-width:19ch; margin:0 auto 24px;}
+.quote-break cite{font-style:normal; font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);}
+
+.final-cta{padding:150px 5vw 100px; text-align:center; border-top:1px solid var(--line); background:#0f0d0b;}
+.final-cta h2{font-size:clamp(2rem,5.4vw,3.8rem); max-width:18ch; margin:0 auto 40px; line-height:1.1;}
+
+footer{padding:70px 5vw 40px; background:#0f0d0b; border-top:1px solid var(--line); text-align:center;}
+.footer-bottom{margin-top:50px; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--ivory-dim); letter-spacing:0.03em; border-top:1px solid var(--line); padding-top:26px; flex-wrap:wrap; gap:16px; max-width:1200px; margin-left:auto; margin-right:auto;}
+
+.rec-timecode{position:fixed; bottom:22px; left:22px; z-index:150; display:flex; align-items:center; gap:9px; background:rgba(27,29,20,0.7); backdrop-filter:blur(6px); border:1px solid var(--line); padding:9px 14px; font-family:ui-monospace,monospace; font-size:0.72rem; letter-spacing:0.05em; color:var(--ivory-dim);}
+.rec-timecode .dot{width:7px; height:7px; border-radius:50%; background:var(--clay); animation:recpulse 1.6s ease-in-out infinite; flex-shrink:0;}
+.rec-timecode b{color:var(--ivory); font-weight:500;}
+@keyframes recpulse{0%,100%{opacity:1;}50%{opacity:0.2;}}
+@media (max-width:820px){.rec-timecode{display:none;}}
+
+.video-modal{position:fixed; inset:0; z-index:300; background:rgba(10,9,7,0.92); display:none; align-items:center; justify-content:center; padding:5vw;}
+.video-modal.is-open{display:flex;}
+.video-modal-inner{width:100%; max-width:960px; aspect-ratio:16/9; background:#000; position:relative; border:1px solid var(--line);}
+.video-modal-inner.is-vertical{width:auto; height:85vh; max-height:85vh; max-width:90vw; aspect-ratio:9/16;}
+.video-modal-inner iframe, .video-modal-inner video{position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:contain;}
+.video-modal-close{position:absolute; top:-46px; right:0; color:var(--ivory); font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;}
+.video-modal-close:hover{color:var(--gold);}
+
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important; animation-iteration-count:1 !important;}}
+
+@media (max-width:640px){
+  nav{ padding:16px 6vw; }
+  .about-grid{grid-template-columns:1fr; gap:32px;}
+  .about-pin{position:static;}
+  .hero{ padding-top:100px; justify-content:flex-start; min-height:auto; padding-bottom:60px; }
+  .hero-meta{flex-direction:column; gap:16px; margin-top:32px;}
+  .hero-meta div{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px;}
+  .hero-name{ font-size:clamp(1.7rem,8vw,2.4rem); }
+  .hero-sub{ font-size:0.95rem; }
+  .why-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div id="nav-slot"></div>
+<div id="page-slot"></div>
+<div id="footer-slot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<script>
+/* =====================================================
+   TWO PROFILES, ONE SITE
+   The header "blob" toggle switches between:
+   - ODIRA  → the personal site (about, reels & shorts, vlogs, show reel, contact)
+   - MOSTBOOKED → the studio site (documentaries, per the brief)
+   Edit anything between the quotes " " to update copy.
+   Placeholders in [ brackets ] are meant to be swapped for real assets.
+   ===================================================== */
+
+const BRAND = {
+  email: "info@mostbooked.com",
+  phone: "+2347061597667",
+  whatsapp: "https://wa.me/2347061597667",
+  location: "Lagos · Dubai · London",
+  year: "2026",
+  instagram: "https://instagram.com/mostbooked",
+  youtube: "https://youtube.com/@mostbooked",
+  facebook: "https://facebook.com/mostbooked"
+};
+
+/* ---------------- ODIRA (personal) ---------------- */
+const ODIRA = {
+  hero: {
+    kicker: "Cinematographer · Documentary Storyteller · Podcast Host",
+    title: "Odira Ndubuaku",
+    sub: "I spend most of my time waiting for the moment that tells the truth about a person or a place — then I make sure the world sees it.",
+    videoSrc: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784978108/mostbooked_bg_1080p_wjx9f8.mp4",
+    ctaPrimary: { label: "Watch the show reel", href: "#showreel" },
+    ctaSecondary: { label: "Get in touch", href: "#contact" },
+    stat1_number: "118,000+", stat1_label: "Combined audience across YouTube, Instagram & Facebook",
+    stat2_number: "2.6M+", stat2_label: "Views generated in the last 30 days"
+  },
+  about: {
+    photo: "founders photo odira.jpg",
+    headline: "From a design tablet in 2012 to a camera on three continents.",
+    body: "I'm the eye behind Mostbooked — a cinematographer, documentary storyteller and podcast host who has spent over a decade learning to sit across from someone and find the story underneath the highlight reel. That instinct has taken me from graphic design to photography to full documentary production, sitting across from entrepreneurs, industry leaders, creators and cultural icons across Africa and beyond.",
+    timeline: [
+      { year:"2012", desc:"OK Arts — graphic design, the first eye for composition" },
+      { year:"2015", desc:"Photography in Ghana — learning to wait for the moment" },
+      { year:"2018", desc:"Videography in Lagos — Mostbooked begins" },
+      { year:"2023", desc:"International work — Dubai, UK, global clients" },
+      { year:"Now", desc:"Directing documentaries, hosting a podcast, still holding the camera" }
+    ]
+  },
+  showreel: {
+    headline: "The show reel.",
+    body: "A cut of the work I'm proudest of — documentary, live event and brand film, back to back.",
+    thumbSrc: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.mp4",
+    videoId: "iJC1xVY8OrQ",
+    videoSrc: ""
+  },
+  vlogs: {
+    headline: "Vlogs & behind the scenes.",
+    body: "The camera turned around — travel diaries, set life, and the in-between moments that don't make the final cut.",
+    items: [
+      { year:"2026", title:"On the road", tag:"Vlog", image:"images/gallery-private-jet.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
+      { year:"2025", title:"Set life, London", tag:"BTS", image:"images/gallery-behind-scenes.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
+      { year:"2025", title:"A week in Lagos", tag:"Vlog", image:"images/gallery-tug-of-war.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
+      { year:"2024", title:"Dubai diaries", tag:"Vlog", image:"images/gallery-creative-shoot.jpg", thumbSrc:"", videoId:"", videoSrc:"" }
+    ]
+  },
+  reels: {
+    headline: "Instagram reels & shorts.",
+    body: "Short-form clips — the fast cut of a much longer story.",
+    previewSeconds: 6,
+    items: [
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988511/Insta_Saver__mostbooked_reel_CwDMbQwoAt4_720x1280p_1_co6rkt.mp4", title:"Mostbooked", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988475/Insta_Saver__styled_by_maklinscout_reel_DHty9_TsLrQ_1080x1920p_1_rupxhl.mp4", title:"Styled by Maklinscout", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988454/Insta_Saver__mostbooked_reel_CqqYQqfNr4E_720x1280p_1_pdeeha.mp4", title:"Mostbooked", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988426/Insta_Saver__emiesi.o_reel_DMqFic3I4OZ_1080x1920p_1_q431k9.mp4", title:"Emiesi.o", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988447/Insta_Saver__mostbooked_reel_CzwNEYaIWGS_720x1280p_1_d1buzl.mp4", title:"Mostbooked", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988442/Insta_Saver__mostbooked_reel_CpuNQruogBz_720x1280p_1_oetbhi.mp4", title:"Mostbooked", platform:"IG" },
+      { src:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784988438/Insta_Saver__mostbooked_reel_CseIuYEoOzm_720x1280p_1_xjzfcf.mp4", title:"Mostbooked", platform:"IG" }
+    ]
+  },
+  contact: {
+    headline: "Have a story worth telling?",
+    body: "Whether it's a documentary, a brand film, or an idea you can't quite explain yet — I'd like to hear it.",
+  }
+};
+
+/* ---------------- MOSTBOOKED (studio) ---------------- */
+const MOSTBOOKED = {
+  hero: {
+    kicker: "Documentary Studio",
+    title: "Every great legacy deserves to be documented.",
+    sub: "I create cinematic documentaries that transform successful entrepreneurs, founders, executives and cultural icons into unforgettable stories that inspire trust, build influence and preserve legacy.",
+    videoSrc: "https://res.cloudinary.com/tgy6ic5m/video/upload/v1784978108/mostbooked_bg_1080p_wjx9f8.mp4",
+    ctaPrimary: { label: "Book a Discovery Call", href: "#contact" },
+    ctaSecondary: { label: "See featured stories", href: "#stories" },
+    stat1_number: "118,000+", stat1_label: "Combined audience across YouTube, Instagram & Facebook",
+    stat2_number: "2.6M+", stat2_label: "Views generated in the last 30 days"
+  },
+  stories: {
+    headline: "Featured stories.",
+    body: "A portfolio of founder and executive documentaries — built for trust, not just for views.",
+    items: [
+      { title:"Obi Cubana", tag:"Founder Documentary", image:"images/gallery-tug-of-war.jpg", thumbSrc:"https://res.cloudinary.com/tgy6ic5m/video/upload/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.mp4", videoId:"iJC1xVY8OrQ", videoSrc:"" },
+      { title:"TG Omori", tag:"Creative Documentary", image:"images/gallery-behind-scenes.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
+      { title:"Yhemo Lee", tag:"Legacy Film", image:"images/gallery-creative-shoot.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
+      { title:"Enviable", tag:"Personal Brand Documentary", image:"images/gallery-portrait-red.jpg", thumbSrc:"", videoId:"", videoSrc:"" }
+    ]
+  },
+  why: {
+    headline: "Why document your story?",
+    body: "A documentary does more than one job at once — the same film that builds trust today becomes the archive of a legacy tomorrow.",
+    points: [
+      { title:"Build trust", desc:"A camera crew that sits with you long enough to earn the real story reads as credibility to everyone who watches it." },
+      { title:"Attract investors & partners", desc:"A well-told founder story does the convincing a pitch deck can't." },
+      { title:"Strengthen your personal brand", desc:"Cinematic, long-form work that stands apart from short-form noise." },
+      { title:"Preserve legacy", desc:"What you've built, told in your own words, kept for the people who come after." },
+      { title:"Reusable content", desc:"One documentary, cut down for YouTube, LinkedIn, Instagram, your website and keynote stages." }
+    ]
+  },
+  services: {
+    headline: "Services.",
+    intro: "Documentary-first production, built around one founder or executive story at a time.",
+    items: [
+      { title:"Founder Documentaries", desc:"The full-length story of how it was built." },
+      { title:"Executive Storytelling", desc:"Leadership profiles for internal and public audiences." },
+      { title:"Legacy Films", desc:"Long-form documentation made to last, not just to launch." },
+      { title:"Personal Brand Documentaries", desc:"Cinematic proof of who you are and what you stand for." },
+      { title:"Short-form Content", desc:"Reels, shorts and clips derived from the full documentary." }
+    ]
+  },
+  who: {
+    headline: "Who it's for.",
+    tags: ["Entrepreneurs","CEOs","Founders","Investors","Family Businesses","Athletes","Creatives","Executives","Public Figures"]
+  },
+  stats: [
+    { value:"118,000+", label:"Combined followers — YouTube, Instagram & Facebook" },
+    { value:"2.6M+", label:"Views across all platforms in the last 30 days" },
+    { value:"23,700", label:"YouTube watch hours in the last 30 days" },
+    { value:"5", label:"Countries in the top audience locations — Nigeria, UK, US, Ghana, Canada" }
+  ],
+  quote: { text:"Anyone can show people a product. I make people feel something about it.", attribution:"Odira Ndubuaku" },
+  finalCta: {
+    headline: "Your success deserves more than a highlight reel.",
+    body: "Let's create a film that captures not only what you've built, but the legacy you'll leave behind.",
+    button: "Book a Discovery Call"
+  }
+};
+
+let MODE = "odira"; // "mostbooked" | "odira"
+
+/* ---------------- helpers ---------------- */
+function mediaThumb(item, previewSeconds){
+  if(item.thumbSrc){
+    return `<video class="thumb-preview loop-preview" data-preview="${previewSeconds}" muted loop playsinline preload="metadata" poster="${item.image||''}"><source src="${item.thumbSrc}" type="video/mp4"></video>`;
+  }
+  return `<img src="${item.image}" alt="${item.title}">`;
+}
+function clickableAttrs(item, vertical){
+  const clickable = !!(item.videoId || item.videoSrc);
+  return clickable ? `class="media-trigger" data-video-id="${item.videoId||''}" data-video-src="${item.videoSrc||''}" ${vertical?'data-vertical="1"':''} style="cursor:pointer;"` : "";
+}
+function parseCloudinaryUrl(url){
+  const m = (url||"").match(/^https:\/\/res\.cloudinary\.com\/([^/]+)\/video\/upload\/(.+)\.[a-zA-Z0-9]+$/);
+  return m ? { cloudName:m[1], idPath:m[2] } : null;
+}
+
+/* ---------------- nav ---------------- */
+function renderNav(){
+  document.getElementById("nav-slot").innerHTML = `
+    <nav>
+      <div class="blob-switch" id="blob-switch">
+        <div class="blob" id="blob-indicator"></div>
+        <a href="index.html" class="${MODE==='mostbooked'?'is-active':''}">Mostbooked</a>
+        <a href="odira.html" class="${MODE==='odira'?'is-active':''}">Odira</a>
+      </div>
+    </nav>
+  `;
+  initNavScrollHide();
+  positionBlob();
+}
+function positionBlob(){
+  const activeBtn = document.querySelector(".blob-switch a.is-active");
+  const blob = document.getElementById("blob-indicator");
+  if(!activeBtn || !blob) return;
+  blob.style.width = activeBtn.offsetWidth + "px";
+  blob.style.transform = `translateX(${activeBtn.offsetLeft - 4}px)`;
+}
+window.addEventListener("resize", positionBlob);
+function initNavScrollHide(){
+  const nav = document.querySelector("nav");
+  if(!nav) return;
+  const update = ()=> nav.classList.toggle("nav-scrolled", window.scrollY > 80);
+  update();
+  window.addEventListener("scroll", update, { passive:true });
+}
+window.addEventListener("load", positionBlob);
+
+/* ---------------- shared bits ---------------- */
+function renderRecTimer(){
+  if(document.querySelector(".rec-timecode")) return;
+  const el = document.createElement("div");
+  el.className = "rec-timecode";
+  el.innerHTML = `<span class="dot"></span>REC <b id="rec-clock">00:00</b>`;
+  document.body.appendChild(el);
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let seconds = 0;
+  const clock = el.querySelector("#rec-clock");
+  setInterval(()=>{ seconds++; clock.textContent = `${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`; }, 1000);
+}
+function renderVideoModal(){
+  if(document.querySelector(".video-modal")) return;
+  const el = document.createElement("div");
+  el.className = "video-modal"; el.id = "video-modal";
+  el.innerHTML = `
+    <div class="video-modal-inner">
+      <div class="video-modal-close" onclick="closeMediaModal()">Close ✕</div>
+      <iframe id="video-modal-frame" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <video id="video-modal-video" controls playsinline style="display:none;"></video>
+    </div>`;
+  el.addEventListener("click",(e)=>{ if(e.target===el) closeMediaModal(); });
+  document.body.appendChild(el);
+  document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeMediaModal(); });
+}
+function openMediaModal(media){
+  const modal = document.getElementById("video-modal");
+  const frame = document.getElementById("video-modal-frame");
+  const video = document.getElementById("video-modal-video");
+  const inner = modal ? modal.querySelector(".video-modal-inner") : null;
+  if(!modal) return;
+  if(inner) inner.classList.toggle("is-vertical", !!media.vertical);
+  if(media.videoId){
+    video.pause(); video.removeAttribute("src"); video.style.display="none";
+    frame.style.display="block";
+    frame.src = `https://www.youtube.com/embed/${media.videoId}?autoplay=1&rel=0`;
+  }else if(media.videoSrc){
+    frame.style.display="none"; frame.src="";
+    video.style.display="block"; video.src = media.videoSrc; video.currentTime=0; video.play().catch(()=>{});
+  }else return;
+  modal.classList.add("is-open");
+}
+function closeMediaModal(){
+  const modal = document.getElementById("video-modal");
+  const frame = document.getElementById("video-modal-frame");
+  const video = document.getElementById("video-modal-video");
+  if(!modal) return;
+  modal.classList.remove("is-open");
+  if(frame) frame.src="";
+  if(video){ video.pause(); video.removeAttribute("src"); video.load(); }
+}
+function wireMediaTriggers(root=document){
+  root.querySelectorAll(".media-trigger:not([data-wired])").forEach(el=>{
+    el.dataset.wired = "1";
+    el.addEventListener("click", ()=> openMediaModal({ videoId: el.dataset.videoId, videoSrc: el.dataset.videoSrc, vertical: el.dataset.vertical==="1" }));
+  });
+}
+function initPreviewLoops(root=document){
+  root.querySelectorAll("video[data-preview]:not([data-loop-wired])").forEach(v=>{
+    v.dataset.loopWired = "1";
+    const sec = parseFloat(v.dataset.preview) || 8;
+    v.addEventListener("timeupdate", ()=>{ if(v.currentTime>sec) v.currentTime=0; });
+  });
+}
+function keepPreviewsPlaying(root=document){
+  if(!keepPreviewsPlaying._observer){
+    keepPreviewsPlaying._observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const v = entry.target;
+        if(entry.isIntersecting){ v.dataset.shouldPlay="1"; v.play().catch(()=>{}); }
+        else{ v.dataset.shouldPlay="0"; v.pause(); }
+      });
+    }, { threshold:0.01, rootMargin:"150px" });
+  }
+  root.querySelectorAll("video.loop-preview:not([data-watchdog])").forEach(v=>{
+    v.dataset.watchdog = "1";
+    v.addEventListener("pause", ()=>{ if(v.dataset.shouldPlay==="1") v.play().catch(()=>{}); });
+    keepPreviewsPlaying._observer.observe(v);
+  });
+}
+function loadReelsInto(trackId, statusTextId, cfg){
+  const track = document.getElementById(trackId);
+  const items = cfg.items || [];
+  const sec = cfg.previewSeconds || 6;
+  if(!track) return;
+  if(items.length===0){
+    track.innerHTML = `<div class="reel-play"></div>`;
+    return;
+  }
+  const cards = items.map(r=>{
+    const parsed = parseCloudinaryUrl(r.src);
+    const base = parsed ? `https://res.cloudinary.com/${parsed.cloudName}/video/upload` : null;
+    const preview = parsed ? `${base}/so_0,eo_${sec},q_auto,f_mp4/${parsed.idPath}.mp4` : r.src;
+    const full = parsed ? `${base}/q_auto/${parsed.idPath}.mp4` : r.src;
+    const poster = parsed ? `${base}/so_0/${parsed.idPath}.jpg` : "";
+    return `
+      <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}" data-vertical="1">
+        <video class="loop-preview" muted loop playsinline preload="metadata" ${poster?`poster="${poster}"`:""}>
+          <source src="${preview}" type="video/mp4">
+        </video>
+        ${r.platform?`<span class="reel-badge">${r.platform}</span>`:""}
+        <div class="reel-play"></div>
+      </div>`;
+  });
+  const doubled = items.length>2 ? cards.concat(cards) : cards;
+  track.innerHTML = doubled.join("");
+  wireMediaTriggers();
+  initPreviewLoops();
+  keepPreviewsPlaying();
+}
+
+/* ---------------- ODIRA sections ---------------- */
+function odiraHero(){
+  const h = ODIRA.hero;
+  return `
+    <section class="hero" id="hero">
+      <video class="hero-video" autoplay muted loop playsinline><source src="${h.videoSrc}" type="video/mp4"></video>
+      <div class="hero-scrim"></div>
+      <span class="hero-kicker">${h.kicker}</span>
+      <h1 class="hero-name">${h.title}</h1>
+      <p class="hero-sub">${h.sub}</p>
+    </section>`;
+}
+function odiraAbout(){
+  const a = ODIRA.about;
+  return `
+    <section class="about-section" id="about">
+      <div class="about-grid">
+        <div class="about-pin">
+          <div class="chapter-mark reveal"><span class="num">01</span><span class="name">About</span></div>
+          <h2 class="reveal">${a.headline}</h2>
+          <div class="about-photo reveal">${a.photo?`<img src="${a.photo}" alt="Odira Ndubuaku">`:"[ Portrait goes here ]"}</div>
+        </div>
+        <div>
+          <div class="about-body reveal"><p>${a.body}</p></div>
+          <div class="timeline">
+            ${a.timeline.map(t=>`<div class="row reveal"><div class="yr">${t.year}</div><div class="desc">${t.desc}</div></div>`).join("")}
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+function odiraShowreel(){
+  const s = ODIRA.showreel;
+  const attrs = clickableAttrs(s, false);
+  return `
+    <section class="showreel" id="showreel">
+      <div class="showreel-intro">
+        <div class="chapter-mark reveal"><span class="num">02</span><span class="name">Show Reel</span></div>
+        <h2 class="reveal">${s.headline}</h2>
+        <p class="reveal">${s.body}</p>
+      </div>
+      <div class="showreel-frame reveal" ${attrs}>
+        ${mediaThumb(s, 10)}
+        <div class="showreel-content"><div class="showreel-play">Watch the full reel</div></div>
+      </div>
+    </section>`;
+}
+function odiraVlogs(){
+  const v = ODIRA.vlogs;
+  return `
+    <section class="reel-chapter" id="vlogs">
+      <div class="reel-chapter-intro">
+        <div class="chapter-mark reveal"><span class="num">03</span><span class="name">Vlogs</span></div>
+        <h2 class="reveal">${v.headline}</h2>
+        <p class="reveal">${v.body}</p>
+      </div>
+      <div class="filmstrip-wrap">
+        <div class="filmstrip-nav">
+          <button id="vlogs-prev" aria-label="Previous vlog">←</button>
+          <button id="vlogs-next" aria-label="Next vlog">→</button>
+        </div>
+        <div class="filmstrip-track" id="vlogs-track">
+          ${v.items.map(item=>{
+            const attrs = clickableAttrs(item,false);
+            return `
+            <div class="film-card ${attrs?'media-trigger':''}" ${attrs}>
+              ${mediaThumb(item,8)}
+              ${(item.videoId||item.videoSrc)?`<div class="play"></div>`:""}
+              <div class="film-card-meta">
+                <span class="film-card-year">${item.year} · ${item.tag}</span>
+                <h4>${item.title}</h4>
+              </div>
+            </div>`;
+          }).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+function wireFilmstripNav(trackId, prevId, nextId){
+  const track = document.getElementById(trackId);
+  const prev = document.getElementById(prevId);
+  const next = document.getElementById(nextId);
+  if(!track || !prev || !next) return;
+  const cardWidth = ()=> (track.querySelector(".film-card")?.offsetWidth || 400) + 2;
+  const updateButtons = ()=>{
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+  };
+  prev.addEventListener("click", ()=> track.scrollBy({ left: -cardWidth(), behavior:"smooth" }));
+  next.addEventListener("click", ()=> track.scrollBy({ left: cardWidth(), behavior:"smooth" }));
+  track.addEventListener("scroll", updateButtons, { passive:true });
+  updateButtons();
+}
+function odiraReels(){
+  const r = ODIRA.reels;
+  return `
+    <section class="reel-chapter" id="reels">
+      <div class="reel-chapter-intro">
+        <div class="chapter-mark reveal"><span class="num">04</span><span class="name">Reels &amp; Shorts</span></div>
+        <h2 class="reveal">${r.headline}</h2>
+        <p class="reveal">${r.body}</p>
+      </div>
+      <div class="reels-slider">
+        <div class="reels-track" id="odira-reels-track"></div>
+      </div>
+    </section>`;
+}
+function odiraContact(){
+  const c = ODIRA.contact;
+  return `
+    <section class="contact-section" id="contact">
+      <div class="chapter-mark reveal" style="justify-content:center;"><span class="num">05</span><span class="name">Contact</span></div>
+      <h2 class="reveal">${c.headline}</h2>
+      <p class="reveal">${c.body}</p>
+      <div class="contact-links reveal">
+        <a class="btn-solid" href="mailto:${BRAND.email}">Email me →</a>
+        <a class="btn-line" href="${BRAND.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="contact-grid reveal">
+        <div class="contact-card"><h4>Email</h4><a href="mailto:${BRAND.email}">${BRAND.email}</a></div>
+        <div class="contact-card"><h4>Phone</h4><p>${BRAND.phone}</p></div>
+        <div class="contact-card"><h4>Based in</h4><p>${BRAND.location}</p></div>
+      </div>
+    </section>`;
+}
+function renderOdiraPage(){
+  document.getElementById("page-slot").innerHTML =
+    odiraHero() + odiraAbout() + odiraShowreel() + odiraVlogs() + odiraReels() + odiraContact();
+  loadReelsInto("odira-reels-track", null, ODIRA.reels);
+  wireMediaTriggers(); initPreviewLoops(); keepPreviewsPlaying();
+  wireFilmstripNav("vlogs-track", "vlogs-prev", "vlogs-next");
+}
+
+/* ---------------- MOSTBOOKED sections ---------------- */
+function mbHero(){
+  const h = MOSTBOOKED.hero;
+  return `
+    <section class="hero" id="hero">
+      <video class="hero-video" autoplay muted loop playsinline><source src="${h.videoSrc}" type="video/mp4"></video>
+      <div class="hero-scrim"></div>
+      <span class="hero-kicker">${h.kicker}</span>
+      <h1 class="hero-name">${h.title}</h1>
+      <p class="hero-sub">${h.sub}</p>
+      <div class="hero-ctas">
+        <a class="btn-line" href="${h.ctaSecondary.href}">${h.ctaSecondary.label}</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>${h.stat1_number}</b>${h.stat1_label}</div>
+        <div><b>${h.stat2_number}</b>${h.stat2_label}</div>
+      </div>
+    </section>`;
+}
+function mbStories(){
+  const s = MOSTBOOKED.stories;
+  return `
+    <section class="stories-chapter" id="stories">
+      <div class="stories-intro">
+        <div class="chapter-mark reveal"><span class="num">01</span><span class="name">Featured Stories</span></div>
+        <h2 class="reveal">${s.headline}</h2>
+        <p class="reveal">${s.body}</p>
+      </div>
+      <div class="stories-grid">
+        ${s.items.map(item=>{
+          const attrs = clickableAttrs(item,false);
+          return `
+          <div class="story-card reveal ${attrs?'media-trigger':''}" ${attrs}>
+            ${mediaThumb(item,8)}
+            <div class="story-card-content">
+              <span class="story-card-tag">${item.tag}</span>
+              <h3>${item.title}</h3>
+            </div>
+          </div>`;
+        }).join("")}
+      </div>
+    </section>`;
+}
+function mbWhy(){
+  const w = MOSTBOOKED.why;
+  return `
+    <section class="why-section" id="why">
+      <div class="why-intro">
+        <div class="chapter-mark reveal"><span class="num">02</span><span class="name">Why Document Your Story</span></div>
+        <h2 class="reveal">${w.headline}</h2>
+        <p class="reveal" style="color:var(--ivory-dim); margin-top:14px; max-width:56ch;">${w.body}</p>
+      </div>
+      <div class="why-grid">
+        ${w.points.map((p,i)=>`
+          <div class="why-card reveal">
+            <span class="idx">0${i+1}</span>
+            <h4 style="margin-bottom:8px; font-size:1rem;">${p.title}</h4>
+            <p>${p.desc}</p>
+          </div>`).join("")}
+      </div>
+    </section>`;
+}
+function mbServices(){
+  const s = MOSTBOOKED.services;
+  return `
+    <section class="services-section" id="services">
+      <div class="services-intro">
+        <div class="chapter-mark reveal"><span class="num">03</span><span class="name">Services</span></div>
+        <h2 class="reveal">${s.headline}</h2>
+        <p class="reveal" style="color:var(--ivory-dim); margin-top:12px;">${s.intro}</p>
+      </div>
+      <div class="service-rows">
+        ${s.items.map((it,i)=>`
+          <div class="service-row reveal">
+            <span class="idx">0${i+1}</span>
+            <h4>${it.title}</h4>
+            <p>${it.desc}</p>
+          </div>`).join("")}
+      </div>
+    </section>`;
+}
+function mbWho(){
+  const w = MOSTBOOKED.who;
+  return `
+    <section class="who-section" id="who">
+      <div class="chapter-mark reveal" style="justify-content:center;"><span class="num">04</span><span class="name">Who It's For</span></div>
+      <h2 class="reveal">${w.headline}</h2>
+      <div class="who-pills reveal">
+        ${w.tags.map(t=>`<span>${t}</span>`).join("")}
+      </div>
+      <div class="stat-grid">
+        ${MOSTBOOKED.stats.map(st=>`<div class="stat-card reveal"><b>${st.value}</b><span>${st.label}</span></div>`).join("")}
+      </div>
+    </section>`;
+}
+function mbFinalCta(){
+  const f = MOSTBOOKED.finalCta;
+  return `
+    <section class="final-cta" id="contact">
+      <h2 class="reveal">${f.headline}</h2>
+      <p class="reveal" style="color:var(--ivory-dim); max-width:52ch; margin:0 auto 40px;">${f.body}</p>
+      <a class="btn-solid reveal" href="mailto:${BRAND.email}" style="display:inline-flex;">${f.button} →</a>
+    </section>`;
+}
+function renderMostbookedPage(){
+  document.getElementById("page-slot").innerHTML =
+    mbHero() + mbStories() + mbWhy() + mbServices() + mbWho() + mbFinalCta();
+  wireMediaTriggers(); initPreviewLoops(); keepPreviewsPlaying();
+}
+
+function renderPage(){
+  if(MODE === "odira") renderOdiraPage();
+  else renderMostbookedPage();
+}
+
+function renderFooter(){
+  document.getElementById("footer-slot").innerHTML = `
+    <footer id="footer">
+      <div class="footer-bottom">
+        <div>${MODE==='odira' ? 'ODIRA NDUBUAKU' : 'MOSTBOOKED'} © ${BRAND.year}</div>
+        <div>${BRAND.location}</div>
+        <div>${BRAND.email} · ${BRAND.phone}</div>
+        <div>IG ${BRAND.instagram.replace('https://instagram.com/','@')} · YT ${BRAND.youtube.replace('https://youtube.com/','')}</div>
+      </div>
+    </footer>`;
+}
+
+/* ---------------- motion ---------------- */
+function initMotion(){
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced || typeof gsap === "undefined"){
+    document.querySelectorAll(".reveal").forEach(el=>el.classList.add("is-visible"));
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray(".reveal").forEach(el=>{
+    gsap.fromTo(el, { opacity:0, y:34 }, {
+      opacity:1, y:0, duration:0.9, ease:"power2.out",
+      scrollTrigger:{ trigger: el, start:"top 90%" }
+    });
+  });
+  gsap.to(".hero-video", { scale:1.12, ease:"none", scrollTrigger:{ trigger:"#hero", start:"top top", end:"bottom top", scrub:true } });
+  ScrollTrigger.refresh();
+}
+
+renderNav();
+renderRecTimer();
+renderVideoModal();
+renderPage();
+renderFooter();
+window.addEventListener("load", initMotion);
+</script>
+</body>
+</html>
