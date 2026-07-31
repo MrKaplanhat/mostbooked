@@ -145,7 +145,20 @@ nav.nav-scrolled{
 @keyframes marquee-slide{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
 /* Vlogs — wide filmstrip, distinct from vertical reels */
-.filmstrip-wrap{overflow:hidden; padding-bottom:100px;}
+.filmstrip-wrap{padding-bottom:100px; position:relative;}
+.filmstrip-nav{display:flex; gap:10px; padding:0 5vw; margin-bottom:24px;}
+.filmstrip-nav button{
+  width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+  background:rgba(233,228,209,0.04); color:var(--ivory); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all 0.25s ease; font-size:1.1rem;
+}
+.filmstrip-nav button:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+.filmstrip-nav button:disabled{opacity:0.3; cursor:default; background:transparent; color:var(--ivory);}
+.filmstrip-track{
+  display:flex; gap:2px; padding-left:5vw; padding-right:5vw;
+  overflow-x:auto; scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;
+}
+.filmstrip-track::-webkit-scrollbar{display:none;}
 .filmstrip-track{display:flex; gap:2px; width:max-content;}
 .film-card{position:relative; width:min(70vw,460px); aspect-ratio:16/10; flex-shrink:0; overflow:hidden; cursor:pointer; background:#1c1815;}
 .film-card img, .film-card video{width:100%; height:100%; object-fit:cover; filter:grayscale(30%) brightness(0.75); transition:transform 0.6s ease, filter 0.5s ease;}
@@ -243,10 +256,14 @@ footer{padding:70px 5vw 40px; background:#0f0d0b; border-top:1px solid var(--lin
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important; animation-iteration-count:1 !important;}}
 
 @media (max-width:640px){
+  nav{ padding:16px 6vw; }
   .about-grid{grid-template-columns:1fr; gap:32px;}
   .about-pin{position:static;}
-  .hero-meta{flex-direction:column; gap:16px;}
+  .hero{ padding-top:100px; justify-content:flex-start; min-height:auto; padding-bottom:60px; }
+  .hero-meta{flex-direction:column; gap:16px; margin-top:32px;}
   .hero-meta div{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px;}
+  .hero-name{ font-size:clamp(1.7rem,8vw,2.4rem); }
+  .hero-sub{ font-size:0.95rem; }
   .why-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -644,6 +661,10 @@ function odiraVlogs(){
         <p class="reveal">${v.body}</p>
       </div>
       <div class="filmstrip-wrap">
+        <div class="filmstrip-nav">
+          <button id="vlogs-prev" aria-label="Previous vlog">←</button>
+          <button id="vlogs-next" aria-label="Next vlog">→</button>
+        </div>
         <div class="filmstrip-track" id="vlogs-track">
           ${v.items.map(item=>{
             const attrs = clickableAttrs(item,false);
@@ -660,6 +681,21 @@ function odiraVlogs(){
         </div>
       </div>
     </section>`;
+}
+function wireFilmstripNav(trackId, prevId, nextId){
+  const track = document.getElementById(trackId);
+  const prev = document.getElementById(prevId);
+  const next = document.getElementById(nextId);
+  if(!track || !prev || !next) return;
+  const cardWidth = ()=> (track.querySelector(".film-card")?.offsetWidth || 400) + 2;
+  const updateButtons = ()=>{
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+  };
+  prev.addEventListener("click", ()=> track.scrollBy({ left: -cardWidth(), behavior:"smooth" }));
+  next.addEventListener("click", ()=> track.scrollBy({ left: cardWidth(), behavior:"smooth" }));
+  track.addEventListener("scroll", updateButtons, { passive:true });
+  updateButtons();
 }
 function odiraReels(){
   const r = ODIRA.reels;
@@ -698,6 +734,7 @@ function renderOdiraPage(){
     odiraHero() + odiraAbout() + odiraShowreel() + odiraVlogs() + odiraReels() + odiraContact();
   loadReelsInto("odira-reels-track", null, ODIRA.reels);
   wireMediaTriggers(); initPreviewLoops(); keepPreviewsPlaying();
+  wireFilmstripNav("vlogs-track", "vlogs-prev", "vlogs-next");
 }
 
 /* ---------------- MOSTBOOKED sections ---------------- */
@@ -711,7 +748,6 @@ function mbHero(){
       <h1 class="hero-name">${h.title}</h1>
       <p class="hero-sub">${h.sub}</p>
       <div class="hero-ctas">
-        <a class="btn-solid" href="${h.ctaPrimary.href}">${h.ctaPrimary.label} →</a>
         <a class="btn-line" href="${h.ctaSecondary.href}">${h.ctaSecondary.label}</a>
       </div>
       <div class="hero-meta">
