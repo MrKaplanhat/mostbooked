@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/odira", "destination": "/odira.html" }
+  ]
+}
