@@ -617,7 +617,7 @@ function odiraAbout(){
     <section class="about-section" id="about">
       <div class="about-grid">
         <div class="about-pin">
-          <div class="chapter-mark reveal"><span class="num">01</span><span class="name">About</span></div>
+          <div class="chapter-mark reveal"><span class="num">04</span><span class="name">About</span></div>
           <h2 class="reveal">${a.headline}</h2>
           <div class="about-photo reveal">${a.photo?`<img src="${a.photo}" alt="Odira Ndubuaku">`:"[ Portrait goes here ]"}</div>
         </div>
@@ -697,7 +697,7 @@ function odiraReels(){
   return `
     <section class="reel-chapter" id="reels">
       <div class="reel-chapter-intro">
-        <div class="chapter-mark reveal"><span class="num">04</span><span class="name">Reels &amp; Shorts</span></div>
+        <div class="chapter-mark reveal"><span class="num">01</span><span class="name">Reels &amp; Shorts</span></div>
         <h2 class="reveal">${r.headline}</h2>
         <p class="reveal">${r.body}</p>
       </div>
@@ -726,7 +726,7 @@ function odiraContact(){
 }
 function renderOdiraPage(){
   document.getElementById("page-slot").innerHTML =
-    odiraHero() + odiraAbout() + odiraShowreel() + odiraVlogs() + odiraReels() + odiraContact();
+    odiraHero() + odiraReels() + odiraShowreel() + odiraVlogs() + odiraAbout() + odiraContact();
   loadReelsInto("odira-reels-track", null, ODIRA.reels);
   wireMediaTriggers(); initPreviewLoops(); keepPreviewsPlaying();
   wireFilmstripNav("vlogs-track", "vlogs-prev", "vlogs-next");
