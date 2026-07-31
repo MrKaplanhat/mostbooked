@@ -41,9 +41,14 @@ nav{
   display:flex; justify-content:center; align-items:center;
   padding:22px 5vw;
   background:linear-gradient(to bottom, rgba(20,18,16,0.9), transparent);
-  transition:transform 0.4s cubic-bezier(0.2,0.6,0.2,1);
+  transition:background 0.4s ease, padding 0.4s ease;
 }
-nav.nav-hidden{transform:translateY(-100%);}
+nav.nav-scrolled{
+  background:rgba(15,13,11,0.82);
+  backdrop-filter:blur(10px);
+  padding:14px 5vw;
+  border-bottom:1px solid var(--line);
+}
 
 .blob-switch{
   position:relative; display:inline-flex; align-items:center;
@@ -445,15 +450,10 @@ function positionBlob(){
 window.addEventListener("resize", positionBlob);
 function initNavScrollHide(){
   const nav = document.querySelector("nav");
-  if(!nav || nav.dataset.wired) { if(nav) return; }
   if(!nav) return;
-  nav.dataset.wired = "1";
-  let lastY = window.scrollY;
-  window.addEventListener("scroll", ()=>{
-    const y = window.scrollY;
-    nav.classList.toggle("nav-hidden", y>lastY && y>140);
-    lastY = y;
-  }, { passive:true });
+  const update = ()=> nav.classList.toggle("nav-scrolled", window.scrollY > 80);
+  update();
+  window.addEventListener("scroll", update, { passive:true });
 }
 
 function setMode(mode){
