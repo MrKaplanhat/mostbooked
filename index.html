@@ -3,7 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odira Ndubuaku / Mostbooked</title>
+<title>Mostbooked — Documentary Studio | Odira Ndubuaku</title>
+<meta name="description" content="Mostbooked is a documentary studio founded by cinematographer Odira Ndubuaku, creating cinematic founder and legacy documentaries for entrepreneurs, executives and cultural icons across Africa and beyond.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mostbooked.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mostbooked">
+<meta property="og:title" content="Mostbooked — Documentary Studio | Odira Ndubuaku">
+<meta property="og:description" content="Cinematic documentaries that transform entrepreneurs, founders and cultural icons into unforgettable stories — built to inspire trust, build influence and preserve legacy.">
+<meta property="og:url" content="https://mostbooked.com/">
+<meta property="og:locale" content="en_NG">
+<meta property="og:image" content="https://res.cloudinary.com/tgy6ic5m/video/upload/so_0/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mostbooked — Documentary Studio | Odira Ndubuaku">
+<meta name="twitter:description" content="Cinematic founder and legacy documentaries, directed by Odira Ndubuaku.">
+<meta name="twitter:image" content="https://res.cloudinary.com/tgy6ic5m/video/upload/so_0/v1784983303/This_Billionaire_is_building_the_Dubai_of_Nigeria_Obi_Cubana__1080p_1_tredav.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -473,6 +489,23 @@ function initNavScrollHide(){
   window.addEventListener("scroll", update, { passive:true });
 }
 
+const PAGE_META = {
+  mostbooked: {
+    title: "Mostbooked — Documentary Studio | Odira Ndubuaku",
+    description: "Mostbooked is a documentary studio founded by cinematographer Odira Ndubuaku, creating cinematic founder and legacy documentaries for entrepreneurs, executives and cultural icons across Africa and beyond."
+  },
+  odira: {
+    title: "Odira Ndubuaku — Cinematographer & Documentary Storyteller",
+    description: "Odira Ndubuaku is a cinematographer, documentary storyteller and podcast host. See his show reel, vlogs, and Instagram reels & shorts, or get in touch."
+  }
+};
+function updateMeta(){
+  const m = PAGE_META[MODE];
+  if(!m) return;
+  document.title = m.title;
+  const desc = document.querySelector('meta[name="description"]');
+  if(desc) desc.setAttribute("content", m.description);
+}
 function setMode(mode){
   if(mode === MODE) return;
   MODE = mode;
@@ -480,6 +513,7 @@ function setMode(mode){
   renderNav();
   renderPage();
   renderFooter();
+  updateMeta();
   window.requestAnimationFrame(initMotion);
 }
 window.addEventListener("load", positionBlob);
