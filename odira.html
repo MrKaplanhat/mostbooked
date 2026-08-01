@@ -153,6 +153,7 @@ nav.nav-scrolled{
   display:flex; gap:14px; width:100%;
   overflow-x:auto; scroll-behavior:auto; -webkit-overflow-scrolling:touch;
   scrollbar-width:none; -ms-overflow-style:none; cursor:grab; user-select:none;
+  touch-action:pan-x;
 }
 .reels-track::-webkit-scrollbar{display:none;}
 .reels-track.is-dragging{cursor:grabbing; scroll-behavior:auto;}
@@ -652,21 +653,23 @@ function initAutoScrollDrag(trackId){
   // Wheel / trackpad
   track.addEventListener("wheel", () => { pauseNow(); scheduleResume(); }, { passive:true });
 
-  // Mouse drag-to-scroll
-  track.addEventListener("mousedown", (e) => {
+  // Mouse drag-to-scroll (Pointer Events, gated to pointerType "mouse" only —
+  // touch gets real native scrolling untouched, so it can never fight it).
+  track.addEventListener("pointerdown", (e) => {
+    if(e.pointerType !== "mouse") return;
     isDown = true; dragged = false;
-    startX = e.pageX; startScroll = track.scrollLeft;
+    startX = e.clientX; startScroll = track.scrollLeft;
     track.classList.add("is-dragging");
     pauseNow();
   });
-  window.addEventListener("mousemove", (e) => {
-    if(!isDown) return;
-    const delta = e.pageX - startX;
+  window.addEventListener("pointermove", (e) => {
+    if(!isDown || e.pointerType !== "mouse") return;
+    const delta = e.clientX - startX;
     if(Math.abs(delta) > 4) dragged = true;
     track.scrollLeft = startScroll - delta;
   });
-  window.addEventListener("mouseup", () => {
-    if(!isDown) return;
+  window.addEventListener("pointerup", (e) => {
+    if(!isDown || e.pointerType !== "mouse") return;
     isDown = false;
     track.classList.remove("is-dragging");
     scheduleResume();
