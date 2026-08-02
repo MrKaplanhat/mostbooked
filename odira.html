@@ -462,7 +462,11 @@ function mediaThumb(item, previewSeconds){
 }
 function clickableAttrs(item, vertical){
   const clickable = !!(item.videoId || item.videoSrc);
-  return clickable ? `class="media-trigger" data-video-id="${item.videoId||''}" data-video-src="${item.videoSrc||''}" ${vertical?'data-vertical="1"':''} style="cursor:pointer;"` : "";
+  if(!clickable) return { classes:"", attrs:"" };
+  return {
+    classes: "media-trigger",
+    attrs: `data-video-id="${item.videoId||''}" data-video-src="${item.videoSrc||''}" ${vertical?'data-vertical="1"':''} style="cursor:pointer;"`
+  };
 }
 function parseCloudinaryUrl(url){
   const m = (url||"").match(/^https:\/\/res\.cloudinary\.com\/([^/]+)\/video\/upload\/(.+)\.[a-zA-Z0-9]+$/);
@@ -730,7 +734,7 @@ function odiraAbout(){
 }
 function odiraShowreel(){
   const s = ODIRA.showreel;
-  const attrs = clickableAttrs(s, false);
+  const click = clickableAttrs(s, false);
   return `
     <section class="showreel" id="showreel">
       <div class="showreel-intro">
@@ -738,7 +742,7 @@ function odiraShowreel(){
         <h2 class="reveal">${s.headline}</h2>
         <p class="reveal">${s.body}</p>
       </div>
-      <div class="showreel-frame reveal" ${attrs}>
+      <div class="showreel-frame reveal ${click.classes}" ${click.attrs}>
         ${mediaThumb(s, 10)}
         <div class="showreel-content"><div class="showreel-play">Watch the full reel</div></div>
       </div>
@@ -861,9 +865,9 @@ function mbStories(){
       </div>
       <div class="stories-grid">
         ${s.items.map(item=>{
-          const attrs = clickableAttrs(item,false);
+          const click = clickableAttrs(item,false);
           return `
-          <div class="story-card reveal ${attrs?'media-trigger':''}" ${attrs}>
+          <div class="story-card reveal ${click.classes}" ${click.attrs}>
             ${mediaThumb(item,8)}
             <div class="story-card-content">
               <span class="story-card-tag">${item.tag}</span>
