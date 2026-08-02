@@ -181,7 +181,7 @@ nav.nav-scrolled{
   scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;
 }
 .filmstrip-track::-webkit-scrollbar{display:none;}
-.film-card{position:relative; width:min(70vw,460px); aspect-ratio:16/10; flex-shrink:0; overflow:hidden; cursor:pointer; background:#1c1815;}
+.film-card{position:relative; width:min(70vw,460px); aspect-ratio:16/9; flex-shrink:0; overflow:hidden; cursor:pointer; background:#1c1815;}
 .film-card img, .film-card video{width:100%; height:100%; object-fit:cover; filter:grayscale(30%) brightness(0.75); transition:transform 0.6s ease, filter 0.5s ease;}
 .film-card:hover img, .film-card:hover video{transform:scale(1.06); filter:grayscale(0%) brightness(0.9);}
 .film-card-meta{position:absolute; left:24px; bottom:22px; right:24px;}
@@ -354,11 +354,12 @@ const ODIRA = {
   vlogs: {
     headline: "Vlogs & behind the scenes.",
     body: "The camera turned around — travel diaries, set life, and the in-between moments that don't make the final cut.",
+    previewSeconds: 8,
     items: [
-      { year:"2026", title:"On the road", tag:"Vlog", image:"images/gallery-private-jet.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
-      { year:"2025", title:"Set life, London", tag:"BTS", image:"images/gallery-behind-scenes.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
-      { year:"2025", title:"A week in Lagos", tag:"Vlog", image:"images/gallery-tug-of-war.jpg", thumbSrc:"", videoId:"", videoSrc:"" },
-      { year:"2024", title:"Dubai diaries", tag:"Vlog", image:"images/gallery-creative-shoot.jpg", thumbSrc:"", videoId:"", videoSrc:"" }
+      { year:"2026", title:"On the road", tag:"Vlog", src:"https://res.cloudinary.com/dcllxlalx/video/upload/v1785674148/SaveVid.Net_AQPOgAfSr8RraLUUEQN3ghoxgg06SePQmK40YiN-Dafw4A5_57ItC0L7JNJ9kC_Q8_6tRWgMKZUniApiAogbAm9OFJbVVgHp3GoFmcg_bboujy.mp4" },
+      { year:"2025", title:"Set life, London", tag:"BTS", src:"https://res.cloudinary.com/dcllxlalx/video/upload/v1785674131/SaveVid.Net_AQM9Tq6U-XHfI8mT9VMtBCjD04NFONjiS3B2rnPgL7N1fG5qG8qacqXCZTkzhn-QOxzAKMserCv29E6LdPY9bwcXO16aGH2W0CQ2ttqZkRdnqg_dsbnfb.mp4" },
+      { year:"2025", title:"A week in Lagos", tag:"Vlog", src:"https://res.cloudinary.com/dcllxlalx/video/upload/v1785674149/SaveVid.Net_AQPXUOkIb9UBb8Vbbx_sA8-mcchTc4ysz7EhQE2wRR7V7XIQiyRq9Bzs98839fYv_2ls46JySZF2zalzlc28CzhgPMvT8O_83Td4AsE_um8zsn.mp4" },
+      { year:"2024", title:"Dubai diaries", tag:"Vlog", src:"https://res.cloudinary.com/dcllxlalx/video/upload/v1785674130/SaveVid.Net_AQPxKsnCfpyFECjhY_o1YrVsz9LiQzbQS9ALnFWDkPR_WHxc-Htz57rSpdzK8q6eTLPt3wBw9b3vFsnEtUYdZyZ2Kcn8-FcJXJPsAxc_xsvwnb.mp4" }
     ]
   },
   reels: {
@@ -460,6 +461,19 @@ function clickableAttrs(item, vertical){
 function parseCloudinaryUrl(url){
   const m = (url||"").match(/^https:\/\/res\.cloudinary\.com\/([^/]+)\/video\/upload\/(.+)\.[a-zA-Z0-9]+$/);
   return m ? { cloudName:m[1], idPath:m[2] } : null;
+}
+/* One Cloudinary URL in, three URLs out: a short muted looping preview clip,
+   the full-quality video for click-to-play, and a poster frame to show while
+   it loads. Falls back to using the raw URL as-is if it's not a Cloudinary link. */
+function cloudinaryVariants(url, previewSeconds){
+  const parsed = parseCloudinaryUrl(url);
+  if(!parsed) return { preview:url, full:url, poster:"" };
+  const base = `https://res.cloudinary.com/${parsed.cloudName}/video/upload`;
+  return {
+    preview: `${base}/so_0,eo_${previewSeconds},q_auto,f_mp4/${parsed.idPath}.mp4`,
+    full: `${base}/q_auto/${parsed.idPath}.mp4`,
+    poster: `${base}/so_0/${parsed.idPath}.jpg`
+  };
 }
 
 /* ---------------- nav ---------------- */
@@ -584,11 +598,7 @@ function loadReelsInto(trackId, statusTextId, cfg){
     return;
   }
   const cards = items.map(r=>{
-    const parsed = parseCloudinaryUrl(r.src);
-    const base = parsed ? `https://res.cloudinary.com/${parsed.cloudName}/video/upload` : null;
-    const preview = parsed ? `${base}/so_0,eo_${sec},q_auto,f_mp4/${parsed.idPath}.mp4` : r.src;
-    const full = parsed ? `${base}/q_auto/${parsed.idPath}.mp4` : r.src;
-    const poster = parsed ? `${base}/so_0/${parsed.idPath}.jpg` : "";
+    const { preview, full, poster } = cloudinaryVariants(r.src, sec);
     return `
       <div class="reel-card media-trigger" data-video-id="" data-video-src="${full}" data-vertical="1">
         <video class="loop-preview" muted loop playsinline preload="metadata" ${poster?`poster="${poster}"`:""}>
@@ -730,6 +740,7 @@ function odiraShowreel(){
 }
 function odiraVlogs(){
   const v = ODIRA.vlogs;
+  const sec = v.previewSeconds || 8;
   return `
     <section class="reel-chapter" id="vlogs">
       <div class="reel-chapter-intro">
@@ -744,11 +755,22 @@ function odiraVlogs(){
         </div>
         <div class="filmstrip-track" id="vlogs-track">
           ${v.items.map(item=>{
-            const attrs = clickableAttrs(item,false);
+            if(!item.src){
+              return `
+              <div class="film-card">
+                <div class="film-card-meta">
+                  <span class="film-card-year">${item.year} · ${item.tag}</span>
+                  <h4>${item.title} <span class="tag-em">[ paste a Cloudinary link ]</span></h4>
+                </div>
+              </div>`;
+            }
+            const { preview, full, poster } = cloudinaryVariants(item.src, sec);
             return `
-            <div class="film-card ${attrs?'media-trigger':''}" ${attrs}>
-              ${mediaThumb(item,8)}
-              ${(item.videoId||item.videoSrc)?`<div class="play"></div>`:""}
+            <div class="film-card media-trigger" data-video-id="" data-video-src="${full}">
+              <video class="loop-preview" muted loop playsinline preload="metadata" ${poster?`poster="${poster}"`:""}>
+                <source src="${preview}" type="video/mp4">
+              </video>
+              <div class="play"></div>
               <div class="film-card-meta">
                 <span class="film-card-year">${item.year} · ${item.tag}</span>
                 <h4>${item.title}</h4>
